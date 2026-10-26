@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Send feedback about Patience Evertsson's interactive portfolio."
+    />
+
+    <title>Patience Evertsson | Feedback</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Shared website stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Allows keyboard users to skip repeated navigation. -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- HEADER -->
+    <header class="header">
+      <a class="header-logo" href="index.html">PATIENCE EVERTSSON</a>
+
+      <!-- CSS-only mobile-menu control -->
+      <input
+        type="checkbox"
+        id="menu-toggle"
+        class="menu-toggle"
+        aria-label="Toggle navigation menu"
+      />
+
+      <label for="menu-toggle" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav-item" href="index.html">Home</a>
+        <a class="nav-item" href="about.html">About</a>
+
+        <a class="nav-item" href="about.html#experience-education">
+          Experience
+        </a>
+
+        <a class="nav-item" href="projects.html">Projects</a>
+        <a class="nav-item" href="projects.html#gallery">Gallery</a>
+
+        <a
+          class="nav-item"
+          href="feedback.html"
+          aria-current="page"
+        >
+          Feedback
+        </a>
+      </nav>
+
+      <a class="header-btn" href="contact.html">Contact Me</a>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content">
+      <section class="feedback" aria-labelledby="feedback-title">
+        <div class="feedback-container">
+          <header class="feedback-introduction">
+            <p class="section-label">Your Opinion Matters</p>
+
+            <h1 id="feedback-title">Portfolio Feedback</h1>
+
+            <p>
+              Please share your experience of using my portfolio. Your feedback
+              will help me improve its design, accessibility and content.
+            </p>
+
+            <p>
+              Fields marked with <span aria-hidden="true">*</span>
+              are required.
+            </p>
+          </header>
+
+          <!-- novalidate will allow our JavaScript to control validation later. -->
+          <form class="feedback-form" id="feedback-form" novalidate>
+            <!-- FULL NAME -->
+            <div class="form-field">
+              <label for="full-name">
+                Full Name <span aria-hidden="true">*</span>
+              </label>
+
+              <input
+                type="text"
+                id="full-name"
+                name="fullName"
+                autocomplete="name"
+                minlength="2"
+                aria-describedby="full-name-help full-name-error"
+                required
+              />
+
+              <p class="field-help" id="full-name-help">
+                Enter at least two letters. Spaces, apostrophes and hyphens are
+                accepted.
+              </p>
+
+              <!-- JavaScript will place the name error inside this element. -->
+              <p
+                class="error-message"
+                id="full-name-error"
+                aria-live="polite"
+              ></p>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="form-field">
+              <label for="email">
+                Email Address <span aria-hidden="true">*</span>
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                aria-describedby="email-help email-error"
+                required
+              />
+
+              <p class="field-help" id="email-help">
+                Enter an address such as name@example.com.
+              </p>
+
+              <p
+                class="error-message"
+                id="email-error"
+                aria-live="polite"
+              ></p>
+            </div>
+
+            <!-- TOPIC -->
+            <div class="form-field">
+              <label for="topic">
+                Feedback Topic <span aria-hidden="true">*</span>
+              </label>
+
+              <select
+                id="topic"
+                name="topic"
+                aria-describedby="topic-error"
+                required
+              >
+                <option value="">Choose a feedback topic</option>
+                <option value="design">Visual design</option>
+                <option value="content">Portfolio content</option>
+                <option value="accessibility">Accessibility and usability</option>
+              </select>
+
+              <p
+                class="error-message"
+                id="topic-error"
+                aria-live="polite"
+              ></p>
+            </div>
+
+            <!-- COMMENTS -->
+            <div class="form-field">
+              <label for="comments">
+                Comments <span aria-hidden="true">*</span>
+              </label>
+
+              <textarea
+                id="comments"
+                name="comments"
+                rows="7"
+                minlength="15"
+                maxlength="500"
+                aria-describedby="comments-help character-count comments-error"
+                required
+              ></textarea>
+
+              <p class="field-help" id="comments-help">
+                Write at least 15 characters.
+              </p>
+
+              <p class="character-count" id="character-count">
+                0 / 500 characters
+              </p>
+
+              <p
+                class="error-message"
+                id="comments-error"
+                aria-live="polite"
+              ></p>
+            </div>
+
+            <!-- OPTIONAL WEBSITE -->
+            <div class="form-field">
+              <label for="website">
+                Website <span class="optional-text">(optional)</span>
+              </label>
+
+              <input
+                type="url"
+                id="website"
+                name="website"
+                autocomplete="url"
+                placeholder="https://example.com"
+                aria-describedby="website-help website-error"
+              />
+
+              <p class="field-help" id="website-help">
+                Include the complete address beginning with http:// or https://.
+              </p>
+
+              <p
+                class="error-message"
+                id="website-error"
+                aria-live="polite"
+              ></p>
+            </div>
+
+            <!-- Submission result announced to assistive technology. -->
+            <div
+              class="form-status"
+              id="form-status"
+              role="status"
+              aria-live="polite"
+            ></div>
+
+            <div class="form-actions">
+              <button class="feedback-submit" type="submit">
+                Send Feedback
+              </button>
+
+              <button class="feedback-clear" type="reset">
+                Clear Form
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <a class="footer-logo" href="index.html">
+          Patience <span>Evertsson</span>
+        </a>
+
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+          <a href="feedback.html" aria-current="page">Feedback</a>
+        </nav>
+
+        <p class="footer-copy">
+          Copyright &copy; 2026 Patience Evertsson. All rights reserved.
+        </p>
+      </div>
+    </footer>
+</html>
