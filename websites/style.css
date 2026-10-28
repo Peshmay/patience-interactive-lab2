@@ -2169,3 +2169,15 @@ textarea:focus-visible {
     transform: none;
   }
 }
+
+/* Counter is red while fewer than 15 characters are entered */
+.character-count.counter-short {
+  color: #a32323;
+  font-weight: 600;
+}
+
+/* Counter becomes green after reaching the minimum */
+.character-count.counter-valid {
+  color: #237a3b;
+  font-weight: 600;
+}
