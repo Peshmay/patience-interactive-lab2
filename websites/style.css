@@ -1,0 +1,2171 @@
+/* Website colours */
+:root {
+  --plum: #42184f;
+  --gold: #bd9140;
+  --dark: rgb(33, 28, 35);
+  --text: rgb(113, 88, 120);
+  --cream: #fffdf9;
+  --light-cream: rgb(250, 247, 241);
+  --blush: rgb(244, 234, 240);
+  --border: #e8dfd4;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Visible keyboard focus for all interactive elements. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* Styling the desktop HEADER */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  height: 88px;
+  padding: 0 clamp(35px, 7vw, 135px);
+  border-bottom: 1px solid var(--border);
+  background-color: var(--cream);
+}
+
+/* Styling the logo name */
+.header-logo {
+  justify-self: start;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+/* Styling the navigation container */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 3vw, 46px);
+}
+
+/* Styling the individual navigation links */
+.nav-item {
+  position: relative;
+  padding: 20px 0;
+  color: var(--dark);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.17em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+/* Styling the gold hover line */
+.nav-item::after {
+  position: absolute;
+  right: 100%;
+  bottom: 14px;
+  left: 0;
+  height: 1px;
+  background-color: var(--gold);
+  content: "";
+  transition: right 0.25s ease;
+}
+
+.nav-item:hover,
+.nav-item:focus-visible {
+  color: var(--gold);
+}
+
+.nav-item:hover::after,
+.nav-item:focus-visible::after {
+  right: 0;
+}
+
+/* Show which interconnected page the visitor is currently viewing. */
+.nav-item[aria-current="page"] {
+  color: var(--gold);
+}
+
+.nav-item[aria-current="page"]::after {
+  right: 0;
+}
+
+/* Styling the Contact Me button */
+.header-btn {
+  justify-self: end;
+  min-width: 150px;
+  padding: 14px 22px;
+  border: 1px solid var(--gold);
+  background-color: transparent;
+  color: var(--dark);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.header-btn:hover {
+  border-color: var(--plum);
+  background-color: var(--plum);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+
+  transform: translateY(-2px);
+}
+
+/* Keep the Contact button visibly active on the contact page. */
+.header-btn[aria-current="page"] {
+  border-color: var(--plum);
+  background-color: var(--plum);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+/* Styling the hamburger menu */
+.menu-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.hamburger {
+  display: none;
+}
+
+.menu-toggle:focus-visible + .hamburger {
+  outline: 3px solid var(--gold);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+/* MOBILE AND TABLET HEADER */
+@media (max-width: 850px) {
+  .header {
+    grid-template-columns: 1fr auto;
+    min-height: 76px;
+    height: auto;
+    padding: 0 24px;
+  }
+
+  .header-logo {
+    font-size: 18px;
+  }
+
+  /* Show hamburger */
+
+  .hamburger {
+    display: flex;
+    width: 32px;
+    height: 22px;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  /* Hamburger lines */
+
+  .hamburger span {
+    width: 100%;
+    height: 2px;
+    border-radius: 20px;
+    background-color: var(--plum);
+
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  /* Hide navigation and contact button */
+
+  .nav,
+  .header-btn {
+    display: none;
+  }
+
+  /* Mobile navigation */
+
+  .nav {
+    grid-column: 1 / -1;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 15px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-item {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 12px;
+  }
+
+  /* Remove desktop hover line */
+
+  .nav-item::after {
+    display: none;
+  }
+
+  /* Mobile Contact Me button */
+
+  .header-btn {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: var(--gold);
+    color: white;
+  }
+
+  /* Open the menu when checkbox is checked */
+
+  .menu-toggle:checked ~ .nav {
+    display: flex;
+  }
+
+  .menu-toggle:checked ~ .header-btn {
+    display: block;
+  }
+
+  /* Change hamburger into an X */
+
+  .menu-toggle:checked + .hamburger span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+  }
+
+  .menu-toggle:checked + .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle:checked + .hamburger span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+}
+
+/*Small-phone adjustment */
+
+@media (max-width: 520px) {
+  .header {
+    min-height: 72px;
+    padding: 0 16px;
+  }
+
+  .header-logo {
+    font-size: 16px;
+    letter-spacing: 0.06em;
+  }
+
+  .hamburger {
+    width: 30px;
+    height: 21px;
+  }
+}
+
+/* HERO SECTION */
+
+#hero {
+  position: relative;
+  width: 100%;
+}
+
+.hero-content {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 88px);
+  min-height: 720px;
+  overflow: hidden;
+
+  background: linear-gradient(
+    to right,
+    var(--blush) 0%,
+    var(--blush) 58%,
+    var(--light-cream) 58%,
+    var(--light-cream) 100%
+  );
+}
+
+/* Styling the Hero portrait container*/
+
+.hero-portrait {
+  position: absolute;
+  top: 45px;
+  right: clamp(35px, 7vw, 135px);
+  bottom: 0;
+  z-index: 1;
+  width: min(48vw, 850px);
+  overflow: hidden;
+  border-radius: 50% 50% 0 0;
+  background-color: white;
+  box-shadow: 0 20px 55px rgba(64, 27, 75, 0.1);
+}
+
+.hero-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Styling the Hero information card */
+
+.hero-card {
+  position: absolute;
+  bottom: 28px;
+  left: clamp(35px, 7vw, 135px);
+  z-index: 2;
+  width: min(52vw, 900px);
+  padding: clamp(45px, 4.5vw, 65px);
+  background-color: rgba(255, 253, 249, 0.97);
+  box-shadow: 0 20px 55px rgba(64, 27, 75, 0.09);
+}
+
+/*Small introduction text*/
+
+.hero-eyebrow {
+  margin-bottom: 25px;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+/* Main heading */
+
+.hero-title {
+  margin-bottom: 28px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(4rem, 5.2vw, 6rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+/* styling the word “Developer” */
+
+.hero-title span {
+  display: block;
+  margin-top: 22px;
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* The Hero description text */
+
+.hero-description {
+  max-width: 560px;
+  margin-bottom: 30px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* View My Work button */
+
+.hero-primary-btn {
+  display: inline-block;
+  min-width: 312px;
+  padding: 22px 30px;
+  border: 1px solid var(--plum);
+  background-color: var(--plum);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Hover effect for the primary button */
+
+.hero-primary-btn:hover {
+  background-color: var(--gold);
+  color: white;
+
+  transform: translateY(-2px);
+}
+
+/* Social links container */
+
+.hero-socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+/* Individual social link */
+
+.hero-socials a {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--plum);
+  font-size: 18px;
+  text-decoration: none;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.hero-socials a:hover {
+  border-color: var(--gold);
+  background-color: var(--plum);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* TABLET AND MOBILE HERO*/
+
+@media (max-width: 850px) {
+  .hero-content {
+    display: flex;
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 42px 20px 70px;
+    background: white;
+    overflow: visible;
+  }
+
+  /* Image appears first */
+
+  .hero-portrait {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    z-index: 1;
+    order: 1;
+    width: min(72vw, 430px);
+    height: min(72vw, 430px);
+    margin: 0 auto 42px;
+    overflow: hidden;
+    border: 7px solid #f2f4f8;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow:
+      0 22px 55px rgba(31, 37, 89, 0.08),
+      0 0 0 1px rgba(31, 37, 89, 0.03);
+  }
+
+  .hero-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* Text appears below the image */
+
+  .hero-card {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    z-index: 2;
+    order: 2;
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    text-align: left;
+  }
+
+  .hero-title {
+    font-size: clamp(3.8rem, 11vw, 5.2rem);
+  }
+
+  .hero-primary-btn {
+    min-width: 220px;
+  }
+
+  .hero-socials {
+    justify-content: flex-start;
+  }
+}
+
+/* SMALL MOBILE HERO */
+
+@media (max-width: 520px) {
+  .hero-content {
+    padding: 34px 16px 60px;
+  }
+
+  .hero-portrait {
+    width: min(78vw, 360px);
+    height: min(78vw, 360px);
+    margin-bottom: 34px;
+    border-width: 6px;
+  }
+
+  .hero-card {
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 20px;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+  }
+
+  .hero-title {
+    margin-bottom: 28px;
+    font-size: clamp(3.4rem, 16vw, 4.5rem);
+  }
+
+  .hero-title span {
+    margin-top: 10px;
+  }
+
+  .hero-description {
+    margin-bottom: 28px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .hero-primary-btn {
+    width: 220px;
+    min-width: 0;
+    padding: 17px 20px;
+  }
+
+  .hero-socials {
+    margin-top: 24px;
+  }
+}
+
+/* Styling for ABOUT SECTION */
+
+.about {
+  width: 100%;
+  min-height: calc(100vh - 88px);
+  padding: 55px clamp(30px, 7vw, 135px) 0;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(
+    to right,
+    var(--light-cream) 0%,
+    var(--light-cream) 55%,
+    #f3ece8 55%,
+    #f3ece8 100%
+  );
+
+  scroll-margin-top: 88px;
+}
+
+/* the two-column layout for the About Section */
+
+.about-container {
+  display: flex;
+  align-items: center;
+  width: min(100%, 1600px);
+  height: min(790px, calc(100vh - 143px));
+  min-height: 650px;
+  margin: 0 auto;
+}
+
+/* style the image container */
+
+.about-img {
+  position: relative;
+  z-index: 1;
+  align-self: stretch;
+  width: 47%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 330px 330px 0 0;
+  background-color: white;
+  box-shadow: 0 20px 50px rgba(64, 27, 75, 0.08);
+}
+
+/* style the image */
+
+.about-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+/* styling the information card */
+
+.about-text {
+  position: relative;
+  z-index: 2;
+  width: 58%;
+  margin-left: -5%;
+  padding: clamp(50px, 5vw, 78px);
+  background-color: rgba(255, 253, 249, 0.98);
+  box-shadow: 0 20px 50px rgba(64, 27, 75, 0.09);
+}
+
+/* style the small label */
+
+.section-label {
+  margin-bottom: 34px;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+/* style the About heading */
+
+.about-text h1,
+.about-text h2 {
+  margin-bottom: 36px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(4.2rem, 5.5vw, 6rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+/* style the About paragraph */
+
+.about-text > p:not(.section-label) {
+  max-width: 700px;
+  margin-bottom: 22px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+/* Who I am label */
+
+.about-text p span {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* space between paragraphs */
+
+.about-text > p:last-child {
+  margin-bottom: 0;
+}
+
+/* TABLET ABOUT SECTION */
+
+@media (max-width: 850px) {
+  .about {
+    min-height: auto;
+    padding: 45px 24px;
+    background: var(--light-cream);
+    scroll-margin-top: 76px;
+  }
+
+  .about-container {
+    width: 100%;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  .about-img {
+    width: min(100%, 600px);
+    height: 620px;
+    border-radius: 300px 300px 0 0;
+  }
+
+  .about-text {
+    width: calc(100% - 40px);
+    margin: -65px auto 0;
+    padding: 45px 35px;
+  }
+
+  .about-text h1,
+  .about-text h2 {
+    margin-bottom: 28px;
+
+    font-size: clamp(3.7rem, 12vw, 5rem);
+  }
+
+  .about-text > p:not(.section-label) {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+}
+
+/* MOBILE ABOUT SECTION */
+
+@media (max-width: 520px) {
+  .about {
+    padding: 30px 14px;
+    scroll-margin-top: 72px;
+  }
+
+  .about-img {
+    width: 100%;
+    height: 470px;
+    border-radius: 235px 235px 0 0;
+  }
+
+  .about-text {
+    width: calc(100% - 20px);
+    margin-top: -40px;
+    padding: 34px 22px;
+  }
+
+  .section-label {
+    margin-bottom: 22px;
+    font-size: 9px;
+  }
+
+  .about-text h1,
+  .about-text h2 {
+    margin-bottom: 25px;
+    font-size: clamp(3.3rem, 16vw, 4.2rem);
+  }
+
+  .about-text > p:not(.section-label) {
+    margin-bottom: 18px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+}
+
+/* EXPERIENCE AND EDUCATION */
+
+.experience-education {
+  width: 100%;
+  min-height: calc(100vh - 88px);
+  padding: 18px clamp(30px, 7vw, 135px) 35px;
+  border-top: 1px solid var(--border);
+  background-color: var(--cream);
+  scroll-margin-top: 88px;
+}
+
+/* style for title area */
+
+.experience-education .section-title {
+  width: min(100%, 820px);
+  margin: 0 auto 22px;
+  text-align: center;
+}
+
+.experience-education .section-title h2 {
+  margin-bottom: 10px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.6rem, 3.5vw, 3.4rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.experience-education .section-title > p:last-child {
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* creating two equal columns */
+
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+  width: min(100%, 1550px);
+  margin: 0 auto;
+}
+
+/* styling for journey cards */
+
+.journey-card {
+  position: relative;
+  height: 100%;
+  padding: 26px 36px 30px;
+  border: 1px solid rgba(189, 145, 64, 0.28);
+  border-top: 5px solid var(--gold);
+  background-color: var(--light-cream);
+  box-shadow: 0 18px 45px rgba(64, 27, 75, 0.065);
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.journey-card:hover {
+  border-color: rgba(189, 145, 64, 0.55);
+  box-shadow: 0 25px 60px rgba(64, 27, 75, 0.11);
+  transform: translateY(-5px);
+}
+
+/* styling the card headings and icons */
+
+.journey-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.journey-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid rgba(189, 145, 64, 0.36);
+  border-radius: 50%;
+  background-color: rgba(189, 145, 64, 0.08);
+  color: var(--gold);
+  font-size: 14px;
+}
+
+.journey-card h3 {
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.8rem, 2vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* creating the timeline */
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 28px;
+}
+
+/* creating the vertical gold line for the timeline */
+
+.timeline::before {
+  position: absolute;
+  top: 8px;
+  bottom: 10px;
+  left: 8px;
+  width: 1px;
+  background-color: rgba(189, 145, 64, 0.38);
+  content: "";
+}
+
+/* creating the timeline circles */
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  position: absolute;
+  top: 6px;
+  left: -28px;
+  width: 13px;
+  height: 13px;
+  border: 3px solid var(--light-cream);
+  border-radius: 50%;
+  background-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(189, 145, 64, 0.18);
+  content: "";
+}
+
+/* style the timeline text */
+
+.timeline-date {
+  display: inline-block;
+  margin-bottom: 4px;
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.timeline-item h4 {
+  margin-bottom: 3px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.3rem, 1.6vw, 1.65rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.timeline-item p {
+  color: var(--text);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+/* TABLET EXPERIENCE SECTION */
+
+@media (max-width: 850px) {
+  .experience-education {
+    min-height: auto;
+    padding: 35px 24px 60px;
+    scroll-margin-top: 76px;
+  }
+
+  .experience-education .section-title {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+
+  .experience-education .section-title h2 {
+    font-size: clamp(2.7rem, 8vw, 3.8rem);
+  }
+
+  .experience-education .section-title > p:last-child {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Change from two columns to one */
+
+  .journey-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .journey-card {
+    padding: 30px;
+  }
+
+  .timeline {
+    gap: 22px;
+  }
+
+  .timeline-item h4 {
+    font-size: 1.6rem;
+  }
+}
+
+/* MOBILE EXPERIENCE SECTION */
+
+@media (max-width: 520px) {
+  .experience-education {
+    padding: 30px 16px 50px;
+    scroll-margin-top: 72px;
+  }
+
+  .experience-education .section-title {
+    margin-bottom: 25px;
+    text-align: left;
+  }
+
+  .experience-education .section-title h2 {
+    margin-bottom: 12px;
+    font-size: clamp(2.4rem, 11vw, 3.1rem);
+    line-height: 1;
+  }
+
+  .experience-education .section-title > p:last-child {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .journey-grid {
+    gap: 22px;
+  }
+
+  .journey-card {
+    padding: 26px 20px 30px;
+  }
+
+  .journey-card-header {
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .journey-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .journey-card h3 {
+    font-size: 1.8rem;
+  }
+
+  .timeline {
+    gap: 24px;
+    padding-left: 25px;
+  }
+
+  .timeline::before {
+    left: 7px;
+  }
+
+  .timeline-item::before {
+    left: -24px;
+    width: 11px;
+    height: 11px;
+  }
+
+  .timeline-date {
+    font-size: 9px;
+    letter-spacing: 0.13em;
+  }
+
+  .timeline-item h4 {
+    font-size: 1.45rem;
+  }
+
+  .timeline-item p {
+    font-size: 12.5px;
+  }
+}
+
+/* PROJECTS SECTION */
+
+.projects {
+  width: 100%;
+  padding: 45px clamp(30px, 7vw, 135px) 90px;
+  border-top: 1px solid var(--border);
+  background-color: var(--light-cream);
+  scroll-margin-top: 88px;
+}
+
+/* styles for the projects heading */
+
+.projects .section-title {
+  width: min(100%, 780px);
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.projects .section-title h1,
+.projects .section-title h2 {
+  margin-bottom: 16px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3rem, 4.5vw, 4.3rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.projects .section-title > p:last-child {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--text);
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* creating the three column grid */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+  width: min(100%, 1550px);
+  margin: 0 auto;
+}
+
+/* styling each project card */
+
+.project-card {
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+  flex-direction: column;
+  border: 1px solid rgba(189, 145, 64, 0.18);
+  background-color: var(--cream);
+  box-shadow: 0 14px 35px rgba(64, 27, 75, 0.06);
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: rgba(189, 145, 64, 0.55);
+  box-shadow: 0 24px 50px rgba(64, 27, 75, 0.13);
+  transform: translateY(-8px);
+}
+
+/* styling the project image area */
+
+.project-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(189, 145, 64, 0.15);
+  background-color: #eee8e5;
+}
+
+/* style the image */
+
+.project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+
+  transition:
+    filter 0.4s ease,
+    transform 0.5s ease;
+}
+
+.project-card:hover .project-img img {
+  filter: saturate(1.05);
+  transform: scale(1.035);
+}
+
+/* if screenshot cropped */
+
+.project-card:nth-child(3) .project-img img {
+  object-fit: contain;
+}
+
+/* adding a soft image overlay */
+
+.project-img::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(66, 24, 79, 0.14), transparent 45%);
+  content: "";
+  pointer-events: none;
+}
+
+/* style card content */
+
+.project-body {
+  display: flex;
+  min-height: 190px;
+  padding: 28px;
+  flex: 1;
+  flex-direction: column;
+}
+
+.project-body h2 {
+  margin-bottom: 14px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.7rem, 2vw, 2.2rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.project-body p {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* TABLET PROJECTS SECTION */
+
+@media (max-width: 1000px) {
+  .projects {
+    padding: 55px 24px 70px;
+    scroll-margin-top: 76px;
+  }
+
+  .projects .section-title {
+    margin-bottom: 38px;
+  }
+
+  .projects .section-title h1,
+  .projects .section-title h2 {
+    font-size: clamp(3rem, 8vw, 4rem);
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+  }
+
+  .project-body {
+    min-height: 180px;
+    padding: 25px;
+  }
+
+  .project-body h2 {
+    font-size: 1.9rem;
+  }
+}
+
+/* MOBILE PROJECTS SECTION*/
+
+@media (max-width: 600px) {
+  .projects {
+    padding: 45px 16px 60px;
+    scroll-margin-top: 72px;
+  }
+
+  .projects .section-title {
+    margin-bottom: 32px;
+    text-align: left;
+  }
+
+  .projects .section-title h1,
+  .projects .section-title h2 {
+    margin-bottom: 14px;
+
+    font-size: clamp(2.8rem, 14vw, 3.6rem);
+  }
+
+  .projects .section-title > p:last-child {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* changes the grid to one column*/
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .project-img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .project-body {
+    min-height: 0;
+    padding: 24px 22px 28px;
+  }
+
+  .project-body h2 {
+    margin-bottom: 12px;
+    font-size: 1.9rem;
+  }
+
+  .project-body p {
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+}
+
+/* Accessibility for animation */
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-img img {
+    transition: none;
+  }
+
+  .project-card:hover,
+  .project-card:hover .project-img img {
+    transform: none;
+  }
+}
+
+/* GALLERY SECTION */
+
+.gallery {
+  width: 100%;
+  padding: 40px clamp(30px, 7vw, 135px) 75px;
+  border-top: 1px solid var(--border);
+  background-color: var(--light-cream);
+  scroll-margin-top: 88px;
+}
+
+/* Styling the gallery heading */
+
+.gallery .section-title {
+  width: min(100%, 760px);
+  margin: 0 auto 35px;
+  text-align: center;
+}
+
+.gallery .section-title h2 {
+  margin-bottom: 12px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3rem, 4.5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.gallery .section-title p {
+  max-width: 520px;
+  margin: 0 auto;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* creating the three column gallery grid */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  width: min(100%, 1250px);
+  margin: 0 auto;
+}
+
+/* style each gallery card */
+
+.gallery-card {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid rgba(189, 145, 64, 0.22);
+  background-color: var(--cream);
+  box-shadow: 0 14px 35px rgba(64, 27, 75, 0.06);
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.gallery-card:hover {
+  border-color: rgba(189, 145, 64, 0.55);
+  box-shadow: 0 24px 50px rgba(64, 27, 75, 0.12);
+  transform: translateY(-6px);
+}
+
+/* style the gallery images */
+
+.gallery-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center;
+  background-color: #eee8e5;
+
+  transition:
+    filter 0.35s ease,
+    transform 0.45s ease;
+}
+
+.gallery-card:hover .gallery-img {
+  filter: saturate(1.05);
+  transform: scale(1.04);
+}
+
+/* prevent image zoom */
+
+.gallery-card {
+  position: relative;
+}
+
+.gallery-card figcaption {
+  position: relative;
+  z-index: 1;
+}
+
+/* Longer Grade 5 captions use a title followed by a meaningful explanation. */
+
+.gallery-card figcaption strong,
+.gallery-card figcaption span {
+  display: block;
+}
+
+.gallery-card figcaption strong {
+  margin-bottom: 8px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+}
+
+.gallery-card figcaption span {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* style the captions */
+
+.gallery-card figcaption {
+  padding: 14px 18px 16px;
+  background-color: var(--cream);
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* TABLET GALLERY */
+
+@media (max-width: 850px) {
+  .gallery {
+    padding: 50px 24px 65px;
+    scroll-margin-top: 76px;
+  }
+
+  .gallery .section-title {
+    margin-bottom: 30px;
+  }
+
+  .gallery .section-title h2 {
+    font-size: clamp(3rem, 9vw, 4rem);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .gallery-card figcaption {
+    font-size: 1.3rem;
+  }
+}
+
+/* MOBILE GALLERY*/
+
+@media (max-width: 600px) {
+  .gallery {
+    padding: 42px 16px 60px;
+  }
+
+  .gallery .section-title {
+    margin-bottom: 26px;
+    text-align: left;
+  }
+
+  .gallery .section-title h2 {
+    margin-bottom: 12px;
+    font-size: clamp(2.8rem, 14vw, 3.6rem);
+  }
+
+  .gallery .section-title p {
+    margin: 0;
+    font-size: 13.5px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .gallery-img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .gallery-card figcaption {
+    padding: 13px 16px 15px;
+    font-size: 1.4rem;
+  }
+}
+
+/* EXTRA SMALL MOBILE GALLERY */
+
+@media (max-width: 520px) {
+  .gallery {
+    scroll-margin-top: 72px;
+  }
+}
+
+/* Reduced motion accessiblility  */
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-card,
+  .gallery-img {
+    transition: none;
+  }
+
+  .gallery-card:hover,
+  .gallery-card:hover .gallery-img {
+    transform: none;
+  }
+}
+
+/* CONTACT SECTION */
+
+.contact {
+  width: 100%;
+  padding: 75px clamp(30px, 7vw, 135px) 85px;
+  border-top: 1px solid var(--border);
+  background-color: #f7f5f1;
+  scroll-margin-top: 88px;
+}
+
+/* creating the two-column layout */
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: clamp(50px, 7vw, 100px);
+  width: min(100%, 1500px);
+  margin: 0 auto;
+}
+
+/* style the contact form */
+
+.contact-information {
+  max-width: 650px;
+  padding-top: 80px;
+  align-self: start;
+}
+
+.contact-information .section-label {
+  margin-bottom: 24px;
+}
+
+.contact-information h1,
+.contact-information h2 {
+  margin-bottom: 30px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(4.5rem, 6vw, 7rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+/* style the word "together" in the contact heading */
+
+.contact-information h1 span,
+.contact-information h2 span {
+  display: block;
+  color: var(--gold);
+  font-style: italic;
+}
+
+/* style the description */
+
+.contact-information > p:not(.section-label) {
+  max-width: 580px;
+  margin-bottom: 25px;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* styling the form card */
+
+.contact-form {
+  width: 100%;
+  padding: clamp(40px, 5vw, 65px);
+  border: 1px solid rgba(189, 145, 64, 0.35);
+  background-color: var(--cream);
+  box-shadow: 0 24px 60px rgba(64, 27, 75, 0.07);
+}
+
+.contact-form h2 {
+  margin-bottom: 34px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.5rem, 3vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* styling the form fields */
+
+.form-field {
+  margin-bottom: 26px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--plum);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* styling both the input and textarea fields */
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid rgba(189, 145, 64, 0.45);
+  outline: none;
+  background-color: transparent;
+  color: var(--plum);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* message field vertical resize */
+
+.form-field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* styling the placeholders and focus state */
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: rgba(113, 88, 120, 0.55);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-bottom-color: var(--plum);
+}
+
+/* Styling the send message button */
+
+.contact-submit {
+  width: 100%;
+  min-height: 58px;
+  padding: 17px 25px;
+  border: none;
+  background-color: var(--plum);
+  color: white;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.contact-submit:hover {
+  background-color: var(--gold);
+  box-shadow: 0 18px 35px rgba(189, 145, 64, 0.25);
+  transform: translateY(-3px);
+}
+
+.contact-submit:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* TABLET CONTACT SECTION */
+
+@media (max-width: 850px) {
+  .contact {
+    padding: 60px 24px 70px;
+    scroll-margin-top: 76px;
+  }
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 45px;
+
+    width: min(100%, 700px);
+  }
+
+  .contact-information {
+    max-width: 650px;
+  }
+
+  .contact-information h1,
+  .contact-information h2 {
+    font-size: clamp(4rem, 12vw, 6rem);
+  }
+
+  .contact-form {
+    padding: 45px;
+  }
+}
+
+/*  MOBILE CONTACT SECTION */
+
+@media (max-width: 520px) {
+  .contact {
+    padding: 45px 16px 60px;
+    scroll-margin-top: 72px;
+  }
+
+  .contact-layout {
+    gap: 35px;
+  }
+
+  .contact-information .section-label {
+    margin-bottom: 20px;
+  }
+
+  .contact-information h1,
+  .contact-information h2 {
+    margin-bottom: 25px;
+
+    font-size: clamp(3.5rem, 17vw, 4.8rem);
+  }
+
+  .contact-information > p:not(.section-label) {
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .contact-email {
+    font-size: 14px;
+  }
+
+  .contact-form {
+    padding: 34px 22px;
+  }
+
+  .contact-form h2 {
+    margin-bottom: 28px;
+    font-size: 2.4rem;
+  }
+
+  .form-field {
+    margin-bottom: 24px;
+  }
+
+  .form-field label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+  }
+
+  .form-field input,
+  .form-field textarea {
+    font-size: 15px;
+  }
+
+  .form-field textarea {
+    min-height: 110px;
+  }
+
+  .contact-submit {
+    min-height: 54px;
+    padding: 16px 20px;
+    font-size: 11px;
+  }
+}
+
+/* reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-submit {
+    transition: none;
+  }
+
+  .contact-submit:hover {
+    transform: none;
+  }
+}
+
+/* FOOTER */
+
+.footer {
+  width: 100%;
+  padding: 30px clamp(30px, 7vw, 135px);
+  border-top: 1px solid rgba(189, 145, 64, 0.3);
+  background-color: var(--plum);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  width: min(100%, 1500px);
+  margin: 0 auto;
+}
+
+/* styling the footer logo */
+
+.footer-logo {
+  color: white;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.footer-logo span {
+  color: var(--gold);
+}
+
+.footer-logo:hover {
+  color: var(--gold);
+}
+
+/* style the copyright text */
+
+.footer-copy {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.footer-nav a {
+  color: var(--cream);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+.footer-nav a:hover,
+.footer-nav a:focus-visible {
+  color: var(--gold);
+}
+/* MOBILE FOOTER */
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 28px 16px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-size: 1.5rem;
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    text-align: center;
+  }
+}
+
+/* FEEDBACK PAGE
+   Styles for feedback.html*/
+
+/* Main feedback section */
+.feedback {
+  min-height: 100vh;
+  padding: 115px 5% 64px;
+  background: linear-gradient(
+    135deg,
+    var(--light-cream) 0%,
+    var(--light-cream) 58%,
+    var(--blush) 58%,
+    var(--blush) 100%
+  );
+}
+
+/* Controls the maximum width of the page content */
+.feedback-container {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 44px;
+  align-items: start;
+}
+
+/* Introduction shown beside the form */
+.feedback-introduction {
+  position: sticky;
+  top: 110px;
+}
+
+/* Main page heading */
+.feedback-introduction h1 {
+  margin: 6px 0 18px;
+  color: var(--plum);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.6rem, 4vw, 3.8rem);
+  line-height: 1;
+}
+
+/* Introductory paragraphs */
+.feedback-introduction p:not(.section-label) {
+  max-width: 420px;
+  margin-bottom: 12px;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Required-field star */
+.feedback-introduction p span[aria-hidden="true"],
+.feedback-form label span[aria-hidden="true"] {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* Main form card */
+.feedback-form {
+  padding: 34px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background-color: var(--cream);
+  box-shadow: 0 18px 45px rgba(66, 24, 79, 0.09);
+}
+
+/* Space between form fields */
+.feedback-form .form-field {
+  margin-bottom: 18px;
+}
+
+/* Form labels */
+.feedback-form label {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--dark);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Optional-field text */
+.optional-text {
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+/* Shared appearance for all form controls */
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background-color: #ffffff;
+  color: var(--dark);
+  font: inherit;
+  line-height: 1.45;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Allows only vertical resizing */
+.feedback-form textarea {
+  min-height: 125px;
+  resize: vertical;
+}
+
+/* Placeholder appearance */
+.feedback-form input::placeholder,
+.feedback-form textarea::placeholder {
+  color: #927f96;
+  opacity: 1;
+}
+
+/* Feedback when the pointer is over a field */
+.feedback-form input:hover,
+.feedback-form select:hover,
+.feedback-form textarea:hover {
+  border-color: var(--gold);
+}
+
+/* Visible focus state */
+.feedback-form input:focus,
+.feedback-form select:focus,
+.feedback-form textarea:focus {
+  border-color: var(--gold);
+  outline: 3px solid rgba(189, 145, 64, 0.22);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--gold);
+}
+
+/* Help text below fields */
+.field-help {
+  margin-top: 7px;
+  color: var(--text);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* Character counter */
+.character-count {
+  margin-top: 6px;
+  color: var(--text);
+  font-size: 0.82rem;
+  text-align: right;
+}
+
+/* Field error message */
+.error-message {
+  min-height: 1.25rem;
+  margin-top: 6px;
+  color: #a32323;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Form submission status */
+.form-status {
+  min-height: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Button container */
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Shared button styling */
+.feedback-submit,
+.feedback-clear {
+  min-width: 150px;
+  padding: 12px 22px;
+  border: 2px solid var(--plum);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Submit button */
+.feedback-submit {
+  background-color: var(--plum);
+  color: #ffffff;
+}
+
+/* Clear button */
+.feedback-clear {
+  background-color: transparent;
+  color: var(--plum);
+}
+
+/* Button hover states */
+.feedback-submit:hover {
+  border-color: var(--gold);
+  background-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.feedback-clear:hover {
+  border-color: var(--gold);
+  background-color: var(--blush);
+  color: var(--dark);
+  transform: translateY(-2px);
+}
+
+/* Visible keyboard focus */
+.feedback-submit:focus-visible,
+.feedback-clear:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* FEEDBACK PAGE: TABLET AND MOBILE */
+
+@media (max-width: 850px) {
+  .feedback {
+    padding: 110px 5% 60px;
+    background: var(--light-cream);
+  }
+
+  .feedback-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* Sticky positioning is unnecessary in one column */
+  .feedback-introduction {
+    position: static;
+  }
+
+  .feedback-introduction h1 {
+    margin-bottom: 16px;
+  }
+}
+
+/* Small mobile phones */
+@media (max-width: 520px) {
+  .feedback {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .feedback-form {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .feedback-submit,
+  .feedback-clear {
+    width: 100%;
+  }
+}
+
+/* Remove unnecessary movement when requested */
+@media (prefers-reduced-motion: reduce) {
+  .feedback-form input,
+  .feedback-form select,
+  .feedback-form textarea,
+  .feedback-submit,
+  .feedback-clear {
+    transition: none;
+  }
+
+  .feedback-submit:hover,
+  .feedback-clear:hover {
+    transform: none;
+  }
+}
