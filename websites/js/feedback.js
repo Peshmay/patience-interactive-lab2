@@ -15,6 +15,7 @@ const topicSelect = document.querySelector("#topic");
 const topicError = document.querySelector("#topic-error");
 
 const commentsInput = document.querySelector("#comments");
+const commentsError = document.querySelector("#comments-error");
 const characterCount = document.querySelector("#character-count");
 
 const minimumCommentLength = 15;
@@ -149,10 +150,49 @@ function validateTopic() {
   return true;
 }
 
+/* 
+   COMMENTS VALIDATION
+   */
+
+/*
+  trim() prevents spaces alone from being counted
+  as meaningful feedback.
+*/
+function validateComments() {
+  const comments = commentsInput.value.trim();
+
+  if (comments.length === 0) {
+    showFieldError(
+      commentsInput,
+      commentsError,
+      "Please enter your feedback comments.",
+    );
+
+    return false;
+  }
+
+  if (comments.length < minimumCommentLength) {
+    showFieldError(
+      commentsInput,
+      commentsError,
+      `Comments must contain at least ${minimumCommentLength} characters.`,
+    );
+
+    return false;
+  }
+
+  clearFieldError(commentsInput, commentsError);
+  return true;
+}
+
 /* LIVE COMMENTS COUNTER */
 
 function updateCharacterCount() {
-  const currentLength = commentsInput.value.length;
+  /*
+    Use the trimmed value so that spaces alone do not
+    count toward the required minimum.
+  */
+  const currentLength = commentsInput.value.trim().length;
 
   if (currentLength < minimumCommentLength) {
     characterCount.textContent =
@@ -190,6 +230,14 @@ emailInput.addEventListener("input", () => {
 topicSelect.addEventListener("change", validateTopic);
 topicSelect.addEventListener("blur", validateTopic);
 
-commentsInput.addEventListener("input", updateCharacterCount);
+commentsInput.addEventListener("input", () => {
+  updateCharacterCount();
+
+  if (commentsInput.classList.contains("is-invalid")) {
+    validateComments();
+  }
+});
+
+commentsInput.addEventListener("blur", validateComments);
 
 updateCharacterCount();
