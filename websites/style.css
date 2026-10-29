@@ -2051,6 +2051,23 @@ textarea:focus-visible {
   font-weight: 600;
   line-height: 1.5;
 }
+/* Error shown when the submitted form contains invalid fields */
+.form-status.status-error {
+  padding: 12px 14px;
+  border: 1px solid #a32323;
+  border-radius: 8px;
+  background-color: #fff0f0;
+  color: #8b1e1e;
+}
+
+/* Success shown after a valid submission */
+.form-status.status-success {
+  padding: 12px 14px;
+  border: 1px solid #237a3b;
+  border-radius: 8px;
+  background-color: #effbf2;
+  color: #185c2c;
+}
 
 /* Button container */
 .form-actions {

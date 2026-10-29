@@ -1,5 +1,12 @@
 "use strict";
 
+
+const feedbackForm = document.querySelector("#feedback-form");
+const formStatus = document.querySelector("#form-status");
+const clearButton = document.querySelector(".feedback-clear");
+
+let statusMessageTimer;
+
 // FEEDBACK FORM ELEMENTS
 // Each element is selected once and stored in a const.
 
@@ -272,4 +279,126 @@ websiteInput.addEventListener("input", () => {
   }
 });
 
+// COMPLETE FORM RESET
+
+/*
+  Restores the form values, validation classes, error
+  messages, counter and status area to their initial state.
+*/
+function resetForm() {
+  feedbackForm.reset();
+
+  const formFields = [
+    fullNameInput,
+    emailInput,
+    topicSelect,
+    commentsInput,
+    websiteInput,
+  ];
+
+  const errorElements = [
+    fullNameError,
+    emailError,
+    topicError,
+    commentsError,
+    websiteError,
+  ];
+
+  formFields.forEach((field) => {
+    field.classList.remove("is-invalid", "is-valid");
+    field.removeAttribute("aria-invalid");
+  });
+
+  errorElements.forEach((errorElement) => {
+    errorElement.textContent = "";
+  });
+
+  updateCharacterCount();
+
+  formStatus.textContent = "";
+  formStatus.classList.remove("status-error", "status-success");
+
+  clearTimeout(statusMessageTimer);
+}
+
+// FORM SUBMISSION
+
+/*
+  Prevents the page from reloading, validates every field
+  and displays an accessible result inside the page.
+*/
+function handleFormSubmit(event) {
+  event.preventDefault();
+
+  /*
+    Store the name before resetting the form so it can
+    be included in the personalized success message.
+  */
+  const submittedName = fullNameInput.value.trim();
+
+  /*
+    Run every validation function separately so that
+    all invalid fields display their messages.
+  */
+  const isFullNameValid = validateFullName();
+  const isEmailValid = validateEmail();
+  const isTopicValid = validateTopic();
+  const areCommentsValid = validateComments();
+  const isWebsiteValid = validateWebsite();
+
+  const isFormValid =
+    isFullNameValid &&
+    isEmailValid &&
+    isTopicValid &&
+    areCommentsValid &&
+    isWebsiteValid;
+
+  clearTimeout(statusMessageTimer);
+
+  if (!isFormValid) {
+    formStatus.textContent =
+      "Please correct the highlighted fields before submitting.";
+
+    formStatus.classList.add("status-error");
+    formStatus.classList.remove("status-success");
+
+    const firstInvalidField = feedbackForm.querySelector(".is-invalid");
+
+    if (firstInvalidField) {
+      firstInvalidField.focus();
+    }
+
+    return;
+  }
+
+  /*
+    Reset values and validation states before displaying
+    the personalized success message.
+  */
+  resetForm();
+
+  formStatus.textContent = `Thanks for your feedback, ${submittedName}!`;
+
+  formStatus.classList.add("status-success");
+  formStatus.classList.remove("status-error");
+
+  statusMessageTimer = setTimeout(() => {
+    formStatus.textContent = "";
+    formStatus.classList.remove("status-success");
+  }, 4000);
+}
+
+// FORM EVENT LISTENERS
+
+feedbackForm.addEventListener("submit", handleFormSubmit);
+
+clearButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  resetForm();
+});
+
+/*
+  Establish the correct counter state when the page opens.
+  This should be the final instruction in the file.
+*/
 updateCharacterCount();
