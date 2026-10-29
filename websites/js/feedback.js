@@ -1,9 +1,7 @@
 "use strict";
 
-/*
-   FEEDBACK FORM ELEMENTS
-   Each element is selected once and stored in a const.
- */
+// FEEDBACK FORM ELEMENTS
+// Each element is selected once and stored in a const.
 
 const fullNameInput = document.querySelector("#full-name");
 const fullNameError = document.querySelector("#full-name-error");
@@ -20,9 +18,10 @@ const characterCount = document.querySelector("#character-count");
 
 const minimumCommentLength = 15;
 
-/*
-   REUSABLE FIELD-STATE FUNCTIONS
-   */
+const websiteInput = document.querySelector("#website");
+const websiteError = document.querySelector("#website-error");
+
+// REUSABLE FIELD-STATE FUNCTIONS
 
 /*
   Displays an accessible written error and adds
@@ -48,11 +47,22 @@ function clearFieldError(input, errorElement) {
   errorElement.textContent = "";
 }
 
-/* FULL NAME VALIDATION */
+/*
+  Restores a field to its neutral state.
+  This is useful for optional fields that are empty.
+*/
+function clearFieldState(input, errorElement) {
+  input.classList.remove("is-invalid", "is-valid");
+  input.removeAttribute("aria-invalid");
+
+  errorElement.textContent = "";
+}
+
+// FULL NAME VALIDATION
 
 /*
   The Unicode pattern allows international letters,
-  spaces, apostrophes and hyphens.
+  spaces, apostrophes, and hyphens.
 
   Accepted examples:
   Patience Evertsson
@@ -62,7 +72,6 @@ function clearFieldError(input, errorElement) {
 */
 function validateFullName() {
   const fullName = fullNameInput.value.trim();
-
   const validNamePattern = /^[\p{L}\p{M}]+(?:[ '\u2019-][\p{L}\p{M}]+)*$/u;
 
   if (fullName.length === 0) {
@@ -71,7 +80,6 @@ function validateFullName() {
       fullNameError,
       "Please enter your full name.",
     );
-
     return false;
   }
 
@@ -81,7 +89,6 @@ function validateFullName() {
       fullNameError,
       "Your name must contain at least 2 characters.",
     );
-
     return false;
   }
 
@@ -89,9 +96,8 @@ function validateFullName() {
     showFieldError(
       fullNameInput,
       fullNameError,
-      "Use letters, spaces, apostrophes or hyphens only.",
+      "Use letters, spaces, apostrophes, or hyphens only.",
     );
-
     return false;
   }
 
@@ -99,7 +105,7 @@ function validateFullName() {
   return true;
 }
 
-/* EMAIL VALIDATION */
+// EMAIL VALIDATION
 
 /*
   Checks that the email contains content before and
@@ -107,12 +113,10 @@ function validateFullName() {
 */
 function validateEmail() {
   const email = emailInput.value.trim();
-
   const validEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
   if (email.length === 0) {
     showFieldError(emailInput, emailError, "Please enter your email address.");
-
     return false;
   }
 
@@ -122,7 +126,6 @@ function validateEmail() {
       emailError,
       "Enter a valid email address, such as name@example.com.",
     );
-
     return false;
   }
 
@@ -130,9 +133,7 @@ function validateEmail() {
   return true;
 }
 
-/* 
-   TOPIC VALIDATION
-*/
+// TOPIC VALIDATION
 
 /*
   The placeholder has an empty value.
@@ -142,7 +143,6 @@ function validateEmail() {
 function validateTopic() {
   if (topicSelect.value === "") {
     showFieldError(topicSelect, topicError, "Please choose a feedback topic.");
-
     return false;
   }
 
@@ -150,9 +150,7 @@ function validateTopic() {
   return true;
 }
 
-/* 
-   COMMENTS VALIDATION
-   */
+// COMMENTS VALIDATION
 
 /*
   trim() prevents spaces alone from being counted
@@ -167,7 +165,6 @@ function validateComments() {
       commentsError,
       "Please enter your feedback comments.",
     );
-
     return false;
   }
 
@@ -177,7 +174,6 @@ function validateComments() {
       commentsError,
       `Comments must contain at least ${minimumCommentLength} characters.`,
     );
-
     return false;
   }
 
@@ -185,13 +181,37 @@ function validateComments() {
   return true;
 }
 
-/* LIVE COMMENTS COUNTER */
+// OPTIONAL WEBSITE VALIDATION
+
+/*
+  The Website field is optional. An empty field returns
+  to the neutral state. For URL validation, the HTML
+  element should be <input type="url">.
+*/
+function validateWebsite() {
+  const website = websiteInput.value.trim();
+
+  if (website.length === 0) {
+    clearFieldState(websiteInput, websiteError);
+    return true;
+  }
+
+  if (websiteInput.validity.typeMismatch) {
+    showFieldError(
+      websiteInput,
+      websiteError,
+      "Enter a valid URL, such as https://example.com.",
+    );
+    return false;
+  }
+
+  clearFieldError(websiteInput, websiteError);
+  return true;
+}
+
+// LIVE COMMENTS COUNTER
 
 function updateCharacterCount() {
-  /*
-    Use the trimmed value so that spaces alone do not
-    count toward the required minimum.
-  */
   const currentLength = commentsInput.value.trim().length;
 
   if (currentLength < minimumCommentLength) {
@@ -209,7 +229,7 @@ function updateCharacterCount() {
   }
 }
 
-/* EVENT LISTENERS */
+// EVENT LISTENERS
 
 fullNameInput.addEventListener("blur", validateFullName);
 
@@ -239,5 +259,17 @@ commentsInput.addEventListener("input", () => {
 });
 
 commentsInput.addEventListener("blur", validateComments);
+
+websiteInput.addEventListener("blur", validateWebsite);
+
+websiteInput.addEventListener("input", () => {
+  const websiteHasBeenChecked =
+    websiteInput.classList.contains("is-invalid") ||
+    websiteInput.classList.contains("is-valid");
+
+  if (websiteHasBeenChecked) {
+    validateWebsite();
+  }
+});
 
 updateCharacterCount();
