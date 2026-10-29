@@ -2234,3 +2234,25 @@ textarea:focus-visible {
   outline-color: rgba(35, 122, 59, 0.25);
   box-shadow: 0 0 0 1px #237a3b;
 }
+
+/* Skip link is hidden until reached with the keyboard */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 20px;
+  z-index: 9999;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background-color: var(--plum);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+/* Display the link when a keyboard user presses Tab */
+.skip-link:focus {
+  top: 16px;
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
