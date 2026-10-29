@@ -2181,3 +2181,39 @@ textarea:focus-visible {
   color: #237a3b;
   font-weight: 600;
 }
+
+/* FEEDBACK FORM VALIDATION STATES */
+
+/* Red border appears after an invalid field is checked */
+.feedback-form input.is-invalid,
+.feedback-form select.is-invalid,
+.feedback-form textarea.is-invalid {
+  border-color: #a32323;
+  background-color: #fff8f8;
+}
+
+/* Keep a strong red focus state on invalid fields */
+.feedback-form input.is-invalid:focus,
+.feedback-form select.is-invalid:focus,
+.feedback-form textarea.is-invalid:focus {
+  border-color: #a32323;
+  outline-color: rgba(163, 35, 35, 0.25);
+  box-shadow: 0 0 0 1px #a32323;
+}
+
+/* Green border appears only after a field passes validation */
+.feedback-form input.is-valid,
+.feedback-form select.is-valid,
+.feedback-form textarea.is-valid {
+  border-color: #237a3b;
+  background-color: #f8fff9;
+}
+
+/* Keep a strong green focus state on valid fields */
+.feedback-form input.is-valid:focus,
+.feedback-form select.is-valid:focus,
+.feedback-form textarea.is-valid:focus {
+  border-color: #237a3b;
+  outline-color: rgba(35, 122, 59, 0.25);
+  box-shadow: 0 0 0 1px #237a3b;
+}
