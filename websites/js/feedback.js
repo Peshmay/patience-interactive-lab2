@@ -1,17 +1,24 @@
 "use strict";
 
-// FEEDBACK FORM ELEMENTS
-// Each element is selected once and stored in a const.
+/*
+   FEEDBACK FORM ELEMENTS
+   Each element is selected once and stored in a const.
+ */
 
 const fullNameInput = document.querySelector("#full-name");
 const fullNameError = document.querySelector("#full-name-error");
+
+const emailInput = document.querySelector("#email");
+const emailError = document.querySelector("#email-error");
 
 const commentsInput = document.querySelector("#comments");
 const characterCount = document.querySelector("#character-count");
 
 const minimumCommentLength = 15;
 
-//REUSABLE FIELD-STATE FUNCTIONS
+/*
+   REUSABLE FIELD-STATE FUNCTIONS
+   ================================================== */
 
 /*
   Displays an accessible written error and adds
@@ -26,7 +33,7 @@ function showFieldError(input, errorElement, message) {
 }
 
 /*
-  Removes an existing error and adds the green state.
+  Removes the written error and adds the green state.
   This runs only after the field has been checked.
 */
 function clearFieldError(input, errorElement) {
@@ -37,13 +44,13 @@ function clearFieldError(input, errorElement) {
   errorElement.textContent = "";
 }
 
-//   FULL NAME VALIDATION
+/* FULL NAME VALIDATION */
 
 /*
   The Unicode pattern allows international letters,
   spaces, apostrophes and hyphens.
 
-  Examples accepted:
+  Accepted examples:
   Patience Evertsson
   Åsa Lind
   Jean-Pierre
@@ -88,41 +95,76 @@ function validateFullName() {
   return true;
 }
 
-// LIVE COMMENTS COUNTER
+/* EMAIL VALIDATION */
+
+/*
+  Checks that the email contains content before and
+  after @, followed by a plausible domain extension.
+*/
+function validateEmail() {
+  const email = emailInput.value.trim();
+
+  const validEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  if (email.length === 0) {
+    showFieldError(emailInput, emailError, "Please enter your email address.");
+
+    return false;
+  }
+
+  if (!validEmailPattern.test(email)) {
+    showFieldError(
+      emailInput,
+      emailError,
+      "Enter a valid email address, such as name@example.com.",
+    );
+
+    return false;
+  }
+
+  clearFieldError(emailInput, emailError);
+  return true;
+}
+
+/* LIVE COMMENTS COUNTER */
 
 function updateCharacterCount() {
   const currentLength = commentsInput.value.length;
 
   if (currentLength < minimumCommentLength) {
     characterCount.textContent =
-      `${currentLength} characters entered — ` +
+      `${currentLength} characters entered - ` +
       `minimum ${minimumCommentLength} required`;
 
     characterCount.classList.remove("counter-valid");
     characterCount.classList.add("counter-short");
   } else {
-    characterCount.textContent = `${currentLength} characters entered — minimum reached`;
+    characterCount.textContent = `${currentLength} characters entered - minimum reached`;
 
     characterCount.classList.remove("counter-short");
     characterCount.classList.add("counter-valid");
   }
 }
 
-//   EVENT LISTENERS
+/* EVENT LISTENERS */
 
-/*
-  Validate after the visitor leaves the name field.
-  This avoids showing an error before they have interacted.
-*/
+/* Validate the name after the visitor leaves the field. */
 fullNameInput.addEventListener("blur", validateFullName);
 
-/*
-  After an error has appeared, check again while the
-  visitor corrects their answer.
-*/
+/* Recheck the name while an existing error is corrected. */
 fullNameInput.addEventListener("input", () => {
   if (fullNameInput.classList.contains("is-invalid")) {
     validateFullName();
+  }
+});
+
+/* Validate the email after the visitor leaves the field. */
+emailInput.addEventListener("blur", validateEmail);
+
+/* Recheck the email while an existing error is corrected. */
+emailInput.addEventListener("input", () => {
+  if (emailInput.classList.contains("is-invalid")) {
+    validateEmail();
   }
 });
 
