@@ -1890,7 +1890,7 @@ textarea:focus-visible {
 /* Main feedback section */
 .feedback {
   min-height: 100vh;
-  padding: 115px 5% 64px;
+  padding: 28px 5% 48px;
   background: linear-gradient(
     135deg,
     var(--light-cream) 0%,
@@ -1906,7 +1906,7 @@ textarea:focus-visible {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  gap: 44px;
+  gap: 36px;
   align-items: start;
 }
 
@@ -1943,7 +1943,7 @@ textarea:focus-visible {
 
 /* Main form card */
 .feedback-form {
-  padding: 34px;
+  padding: 26px 30px;
   border: 1px solid var(--border);
   border-radius: 22px;
   background-color: var(--cream);
@@ -1952,7 +1952,7 @@ textarea:focus-visible {
 
 /* Space between form fields */
 .feedback-form .form-field {
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 /* Form labels */
@@ -1976,13 +1976,13 @@ textarea:focus-visible {
 .feedback-form select,
 .feedback-form textarea {
   width: 100%;
-  padding: 11px 14px;
+  padding: 9px 12px;
   border: 1px solid var(--border);
   border-radius: 9px;
   background-color: #ffffff;
   color: var(--dark);
   font: inherit;
-  line-height: 1.45;
+  line-height: 1.4;
   transition:
     border-color 0.25s ease,
     box-shadow 0.25s ease,
@@ -1991,7 +1991,7 @@ textarea:focus-visible {
 
 /* Allows only vertical resizing */
 .feedback-form textarea {
-  min-height: 125px;
+  min-height: 88px;
   resize: vertical;
 }
 
@@ -2021,35 +2021,35 @@ textarea:focus-visible {
 
 /* Help text below fields */
 .field-help {
-  margin-top: 7px;
+  margin-top: 4px;
   color: var(--text);
-  font-size: 0.82rem;
-  line-height: 1.5;
+  font-size: 0.8rem;
+  line-height: 1.4;
 }
 
 /* Character counter */
 .character-count {
-  margin-top: 6px;
+  margin-top: 4px;
   color: var(--text);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   text-align: right;
 }
 
 /* Field error message */
 .error-message {
-  min-height: 1.25rem;
-  margin-top: 6px;
+  min-height: 1.1rem;
+  margin-top: 3px;
   color: #a32323;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
 }
 
 /* Form submission status */
 .form-status {
-  min-height: 24px;
-  margin-bottom: 20px;
+  min-height: 20px;
+  margin-bottom: 12px;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 /* Error shown when the submitted form contains invalid fields */
 .form-status.status-error {
@@ -2079,8 +2079,8 @@ textarea:focus-visible {
 /* Shared button styling */
 .feedback-submit,
 .feedback-clear {
-  min-width: 150px;
-  padding: 12px 22px;
+  min-width: 145px;
+  padding: 10px 20px;
   border: 2px solid var(--plum);
   border-radius: 999px;
   font: inherit;
@@ -2130,7 +2130,7 @@ textarea:focus-visible {
 
 @media (max-width: 850px) {
   .feedback {
-    padding: 110px 5% 60px;
+    padding: 28px 5% 60px;
     background: var(--light-cream);
   }
 
