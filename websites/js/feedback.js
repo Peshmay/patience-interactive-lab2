@@ -11,6 +11,9 @@ const fullNameError = document.querySelector("#full-name-error");
 const emailInput = document.querySelector("#email");
 const emailError = document.querySelector("#email-error");
 
+const topicSelect = document.querySelector("#topic");
+const topicError = document.querySelector("#topic-error");
+
 const commentsInput = document.querySelector("#comments");
 const characterCount = document.querySelector("#character-count");
 
@@ -18,7 +21,7 @@ const minimumCommentLength = 15;
 
 /*
    REUSABLE FIELD-STATE FUNCTIONS
-   ================================================== */
+   */
 
 /*
   Displays an accessible written error and adds
@@ -126,6 +129,26 @@ function validateEmail() {
   return true;
 }
 
+/* 
+   TOPIC VALIDATION
+*/
+
+/*
+  The placeholder has an empty value.
+  Therefore, an empty value means that no topic
+  has been selected.
+*/
+function validateTopic() {
+  if (topicSelect.value === "") {
+    showFieldError(topicSelect, topicError, "Please choose a feedback topic.");
+
+    return false;
+  }
+
+  clearFieldError(topicSelect, topicError);
+  return true;
+}
+
 /* LIVE COMMENTS COUNTER */
 
 function updateCharacterCount() {
@@ -148,28 +171,25 @@ function updateCharacterCount() {
 
 /* EVENT LISTENERS */
 
-/* Validate the name after the visitor leaves the field. */
 fullNameInput.addEventListener("blur", validateFullName);
 
-/* Recheck the name while an existing error is corrected. */
 fullNameInput.addEventListener("input", () => {
   if (fullNameInput.classList.contains("is-invalid")) {
     validateFullName();
   }
 });
 
-/* Validate the email after the visitor leaves the field. */
 emailInput.addEventListener("blur", validateEmail);
 
-/* Recheck the email while an existing error is corrected. */
 emailInput.addEventListener("input", () => {
   if (emailInput.classList.contains("is-invalid")) {
     validateEmail();
   }
 });
 
-/* Update the comments counter after every input. */
+topicSelect.addEventListener("change", validateTopic);
+topicSelect.addEventListener("blur", validateTopic);
+
 commentsInput.addEventListener("input", updateCharacterCount);
 
-/* Establish the correct initial counter state. */
 updateCharacterCount();
