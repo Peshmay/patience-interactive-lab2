@@ -1,65 +1,138 @@
-# Patience Evertsson Portfolio Website
+# Patience Evertsson Interactive Portfolio - Lab 2
 
 ## Project Overview
 
-This project is a responsive and accessible multi-page portfolio created using
-HTML and CSS only.
+This project extends my Lab 1 portfolio with accessible and interactive
+JavaScript features.
 
-The portfolio demonstrates:
+The portfolio is created using semantic HTML, responsive CSS and vanilla
+JavaScript. No JavaScript frameworks or libraries are used.
 
-- Semantic HTML
-- CSS Grid and Flexbox
-- CSS custom properties
-- Responsive media queries
-- Accessible navigation and form labels
-- Keyboard focus states
-- Reduced-motion support
-- CSS-only mobile navigation
+My target for Lab 2 is Grade 5. The grading tracks are cumulative:
+
+- Grade 3: Accessible feedback form and JavaScript validation
+- Grade 4: Grade 3 plus a data-driven skills showcase
+- Grade 5: Grades 3 and 4 plus persistent accessibility display settings
+
+## Current Development Status
+
+- Grade 3 feedback form: completed and tested
+- Grade 4 skills showcase: planned
+- Grade 5 accessibility display panel: planned
+
+Each feature is developed, tested and committed separately before moving to
+the next grade track.
 
 ## Pages
 
-The portfolio contains four interconnected pages:
+The portfolio currently contains five interconnected pages:
 
-- `index.html` – Hero introduction and social links
-- `about.html` – Biography, education and work experience
-- `projects.html` – Six projects and a 3 × 3 original-image gallery
-- `contact.html` – Contact information and a four-field form
+- `index.html` - Hero introduction and social links
+- `about.html` - Biography, education and work experience
+- `projects.html` - Six projects and a 3 x 3 original-image gallery
+- `contact.html` - Contact information and contact form
+- `feedback.html` - Interactive feedback form with JavaScript validation
 
-Every page uses the same header, footer and `style.css` file. Relative links
-allow visitors to move between the pages.
+Every page uses the same header, footer and shared `style.css` file. Relative
+links allow visitors to move between the pages.
 
 The current page is identified using `aria-current="page"` and a gold visual
 state.
 
-## How to View the Website
+## How to Run the Website
 
-1. Download or clone the project.
-2. Keep the HTML files, stylesheet and image folders in their original
-   structure.
-3. Open `index.html` in a web browser.
-4. Use the navigation links to move between the four pages.
+1. Download or clone the repository.
+2. Keep the files and folders in their original structure.
+3. Open the `websites` folder in Visual Studio Code.
+4. Open `index.html` using Live Server.
+5. Use the navigation links to move between the pages.
 
-No installation or JavaScript is required.
+No package installation or build command is required. JavaScript must be
+enabled in the browser for the interactive Lab 2 features.
 
 ## Project Structure
 
-LAB1_PORTFOLIO/
+```text
+patience-interactive-lab2/
 ├── images/
 ├── screenshots/
 ├── websites/
-│ ├── about.html
-│ ├── contact.html
-│ ├── index.html
-│ ├── projects.html
-│ └── style.css
+│   ├── js/
+│   │   └── feedback.js
+│   ├── about.html
+│   ├── contact.html
+│   ├── feedback.html
+│   ├── index.html
+│   ├── projects.html
+│   └── style.css
+├── .gitignore
 ├── build_log.md
 ├── Patience-Documentation.pdf
 └── README.md
+```
 
-The four HTML pages and shared stylesheet are stored in the `websites` folder.
-Website images are stored in `images`, while development and testing evidence
-is stored in `screenshots`. The main project documentation is provided through
-`README.md`, `build_log.md` and `Patience-Documentation.pdf`.
+The HTML documents and shared stylesheet are stored in the `websites` folder.
+The Grade 3 JavaScript is stored in `websites/js/feedback.js`. Website images
+are stored in `images`, while development and testing evidence is stored in
+`screenshots`.
+
+## Lab 2 JavaScript Enhancements
+
+### Grade 3: Accessible Feedback Form
+
+The Grade 3 feature is implemented on `feedback.html`. Its JavaScript is stored
+in `websites/js/feedback.js`.
+
+The form contains:
+
+- Full Name
+- Email Address
+- Topic of Interest
+- Comments
+- Optional Website
+- Submit button
+- Clear button
+
+### Validation Behaviour
+
+- Full Name is required and accepts international letters, spaces, apostrophes
+  and hyphens.
+- Email is required and must contain a plausible address and domain.
+- Topic of Interest requires one of the available choices.
+- Comments are required and must contain at least 15 meaningful characters.
+- A live counter communicates the Comments minimum using text and colour.
+- Website is optional but uses browser URL validation when completed.
+- Invalid fields receive a red border and written error message.
+- Valid fields receive a green border only after passing validation.
+- JavaScript updates `aria-invalid` after checking a field.
+- Focus moves to the first invalid field after an invalid submission.
+
+### Successful Submission
+
+The form uses `event.preventDefault()` because Lab 2 does not include a backend.
+
+After successful validation, JavaScript displays:
+
+`Thanks for your feedback, [Full Name]!`
+
+The form values, validation classes, error messages and character counter are
+reset. The success message disappears automatically after four seconds.
+
+The Clear button also restores the complete initial state.
+
+### Main Grade 3 Functions
+
+- `showFieldError()` displays an error message and invalid state.
+- `clearFieldError()` changes a checked field to its valid state.
+- `clearFieldState()` restores an optional empty field to neutral.
+- `validateFullName()` checks the name requirements.
+- `validateEmail()` checks the email format.
+- `validateTopic()` confirms that a topic was selected.
+- `validateComments()` checks the Comments requirement.
+- `validateWebsite()` checks the optional URL.
+- `updateCharacterCount()` updates the live counter.
+- `resetForm()` restores the complete initial state.
+- `handleFormSubmit()` validates the form and controls submission feedback.
 
 ## Design System and CSS custom properties
 
@@ -112,6 +185,7 @@ Responsive behaviour includes:
 - Smaller typography, images and spacing on narrow screens
   Anchor destinations use scroll-margin-top so that headings remain visible
   below the fixed header.
+- Feedback page: two columns on desktop and one column on smaller screens
 
 ## Semantic HTML
 
@@ -140,6 +214,11 @@ Accessibility features include:
 - A keyboard-accessible CSS-only mobile menu
 - Reduced animation through prefers-reduced-motion
 - Responsive layouts without removing important content
+- Error messages connected to fields using `aria-describedby`
+- Dynamic `aria-invalid` states
+- A live status area for submission feedback
+- Written validation messages that do not rely on colour alone
+- Keyboard focus moves to the first invalid field after submission
 
 ## Main Sections
 
@@ -165,22 +244,41 @@ has a connected label and uses HTML validation.
 Because this project does not include a backend, the form uses mailto: and
 requires a configured email application.
 
+### Feedback
+
+The Feedback page contains an accessible form with Full Name, Email Address,
+Topic of Interest, Comments and an optional Website field.
+
+JavaScript provides immediate validation, written error messages, valid and
+invalid field states, a live character counter, complete Clear behaviour and a
+personalized success message.
+
+Because Lab 2 does not include a backend, the feedback is processed only in the
+browser and is not sent to a server.
+
 ## Technologies
 
 ## Core
 
 - HTML5
 - CSS3
+- Vanilla JavaScript
 - CSS Grid
 - Flexbox
 - CSS custom properties
 - CSS media queries
+- DOM manipulation
+- JavaScript event listeners
 - Google Fonts
 - Font Awesome
 
-## Project Constraint
+## Project Constraints
 
-- No JavaScript
+- Vanilla JavaScript only
+- No JavaScript frameworks
+- No jQuery
+- No backend
+- Feedback form data is not sent to a server
 
 ## Problem-Solving Evidence
 
@@ -241,9 +339,16 @@ The portfolio was tested at the following viewport widths:
 - Horizontal overflow
 - Reduced-motion behaviour
 - Alternative text and form labels
-  All four HTML pages were checked using the W3C Markup Validation Service. The
-  stylesheet was checked using the W3C CSS Validation Service.
-  The original testing and development screenshots are stored in the
-  screenshots folder. The Build Log explains the problems, changes and final
-  results shown in those screenshots.
-# patience-interactive-lab2
+- All five HTML pages were checked using the W3C Markup Validation Service,
+  including the new `feedback.html` page. The shared stylesheet was checked using
+  the W3C CSS Validation Service. JavaScript syntax was checked using
+  `node --check`, and the browser console was checked for runtime errors.
+- Empty feedback-form submission
+- Invalid and valid field values
+- Live Comments counter
+- Optional Website behaviour
+- Personalized success message
+- Four-second success-message timeout
+- Complete Clear-button reset
+- Keyboard-only form operation
+- Browser-console error check
