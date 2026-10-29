@@ -197,7 +197,7 @@ The website uses semantic elements to describe the purpose of its content:
 - <section> groups related content
 - <article> represents each independent project
 - <figure> and <figcaption> connect gallery images to their descriptions
-- <form> contains the contact controls
+- `<form>` groups the controls on the Contact and Feedback pages
 - <footer> contains secondary navigation and copyright information
   Every page contains one main <h1> describing its subject.
 
@@ -258,7 +258,7 @@ browser and is not sent to a server.
 
 ## Technologies
 
-## Core
+### Core
 
 - HTML5
 - CSS3
@@ -319,6 +319,19 @@ I added scroll-margin-top to the anchor destinations:
 #contact {
 scroll-margin-top: 88px;
 }
+
+### Problem 4: Preventing repeated form event listeners
+
+While developing the Feedback form, I accidentally placed the Submit and Clear
+event listeners inside `resetForm()`. This meant that every reset could register
+another copy of the same event listener.
+
+I moved the event listeners outside `resetForm()` and placed them once at the
+end of `feedback.js`. The reset function now only resets values, validation
+classes, messages, the character counter and the status area.
+
+This correction keeps each function focused on one responsibility and prevents
+the same submission handler from running more than once.
 
 ## Testing
 
