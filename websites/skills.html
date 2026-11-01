@@ -27,6 +27,11 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <!-- Devicon icons. -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
 
     <!-- Shared stylesheet -->
     <link rel="stylesheet" href="style.css" />
@@ -82,20 +87,21 @@
               responsive, accessible and maintainable web applications.
             </p>
           </header>
-
           <!-- Skill controls -->
-          <div class="skills-controls" aria-label="Filter and sort skills">
+          <div class="skills-controls">
             <!-- Category filters -->
             <div class="filter-section">
-              <h2 class="control-title">Filter by category</h2>
+              <h2 class="control-title" id="filter-title">
+                Filter by category
+              </h2>
 
               <div
-                class="filter-buttons"
+                class="skills-filters"
                 role="group"
-                aria-label="Skill category filters"
+                aria-labelledby="filter-title"
               >
                 <button
-                  class="filter-button is-active"
+                  class="skill-filter is-active"
                   type="button"
                   data-category="all"
                   aria-pressed="true"
@@ -104,7 +110,7 @@
                 </button>
 
                 <button
-                  class="filter-button"
+                  class="skill-filter"
                   type="button"
                   data-category="frontend"
                   aria-pressed="false"
@@ -113,7 +119,7 @@
                 </button>
 
                 <button
-                  class="filter-button"
+                  class="skill-filter"
                   type="button"
                   data-category="backend"
                   aria-pressed="false"
@@ -122,12 +128,30 @@
                 </button>
 
                 <button
-                  class="filter-button"
+                  class="skill-filter"
                   type="button"
-                  data-category="tools"
+                  data-category="database"
                   aria-pressed="false"
                 >
-                  Tools
+                  Databases
+                </button>
+
+                <button
+                  class="skill-filter"
+                  type="button"
+                  data-category="testing-devops"
+                  aria-pressed="false"
+                >
+                  Testing &amp; DevOps
+                </button>
+
+                <button
+                  class="skill-filter"
+                  type="button"
+                  data-category="cloud-ai"
+                  aria-pressed="false"
+                >
+                  Cloud &amp; AI
                 </button>
               </div>
             </div>
@@ -138,9 +162,7 @@
 
               <select id="skill-sort" name="skillSort">
                 <option value="proficiency">Proficiency: high to low</option>
-
                 <option value="experience">Experience: high to low</option>
-
                 <option value="name">Name: A-Z</option>
               </select>
             </div>
@@ -196,5 +218,6 @@
         </p>
       </div>
     </footer>
+    <script src="js/skills.js"></script>
   </body>
 </html>
