@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Explore Patience Evertsson's technical skills and experience."
+    />
+
+    <title>Patience Evertsson | Skills</title>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Shared stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content"> Skip to main content </a>
+
+    <!-- HEADER -->
+    <header class="header">
+      <a class="header-logo" href="index.html"> PATIENCE EVERTSSON </a>
+
+      <input
+        type="checkbox"
+        id="menu-toggle"
+        class="menu-toggle"
+        aria-label="Toggle navigation menu"
+      />
+
+      <label for="menu-toggle" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav-item" href="index.html">Home</a>
+
+        <a class="nav-item" href="about.html">About</a>
+
+        <a class="nav-item" href="projects.html"> Projects </a>
+
+        <a class="nav-item" href="skills.html" aria-current="page"> Skills </a>
+
+        <a class="nav-item" href="feedback.html"> Feedback </a>
+      </nav>
+
+      <a class="header-btn" href="contact.html"> Contact Me </a>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content">
+      <section class="skills" aria-labelledby="skills-title">
+        <div class="skills-container">
+          <!-- Page introduction -->
+          <header class="skills-introduction">
+            <p class="section-label">Technical Experience</p>
+
+            <h1 id="skills-title">My Skills</h1>
+
+            <p>
+              Explore the technologies and development practices I use to build
+              responsive, accessible and maintainable web applications.
+            </p>
+          </header>
+
+          <!-- Skill controls -->
+          <div class="skills-controls" aria-label="Filter and sort skills">
+            <!-- Category filters -->
+            <div class="filter-section">
+              <h2 class="control-title">Filter by category</h2>
+
+              <div
+                class="filter-buttons"
+                role="group"
+                aria-label="Skill category filters"
+              >
+                <button
+                  class="filter-button is-active"
+                  type="button"
+                  data-category="all"
+                  aria-pressed="true"
+                >
+                  All Skills
+                </button>
+
+                <button
+                  class="filter-button"
+                  type="button"
+                  data-category="frontend"
+                  aria-pressed="false"
+                >
+                  Frontend
+                </button>
+
+                <button
+                  class="filter-button"
+                  type="button"
+                  data-category="backend"
+                  aria-pressed="false"
+                >
+                  Backend
+                </button>
+
+                <button
+                  class="filter-button"
+                  type="button"
+                  data-category="tools"
+                  aria-pressed="false"
+                >
+                  Tools
+                </button>
+              </div>
+            </div>
+
+            <!-- Sorting control -->
+            <div class="sort-section">
+              <label for="skill-sort">Sort skills</label>
+
+              <select id="skill-sort" name="skillSort">
+                <option value="proficiency">Proficiency: high to low</option>
+
+                <option value="experience">Experience: high to low</option>
+
+                <option value="name">Name: A-Z</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Dynamic result information -->
+          <p
+            class="skills-counter"
+            id="skills-counter"
+            role="status"
+            aria-live="polite"
+          >
+            Showing 0 of 0 skills
+          </p>
+
+          <!--
+            JavaScript will create the skill cards inside
+            this container. Do not write finished cards manually.
+          -->
+          <div
+            class="skills-grid"
+            id="skills-grid"
+            aria-label="Technical skills"
+          ></div>
+
+          <noscript>
+            <p class="skills-noscript">
+              JavaScript is required to display and filter the technical skills.
+            </p>
+          </noscript>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <a class="footer-logo" href="index.html">
+          Patience <span>Evertsson</span>
+        </a>
+
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="skills.html" aria-current="page">Skills</a>
+          <a href="feedback.html">Feedback</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <p class="footer-copy">
+          Copyright &copy; 2026 Patience Evertsson. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
