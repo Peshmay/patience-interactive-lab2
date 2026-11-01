@@ -17,18 +17,19 @@ My target for Lab 2 is Grade 5. The grading tracks are cumulative:
 ## Current Development Status
 
 - Grade 3 feedback form: completed and tested
-- Grade 4 skills showcase: planned
-- Grade 5 accessibility display panel: planned
+- Grade 4 data-driven skills showcase: completed and tested
+- Grade 5 accessibility display settings: planned
 
-Each feature is developed, tested and committed separately before moving to
-the next grade track.
+The Grade 4 implementation is documented with desktop, tablet, mobile,
+filtering, sorting and keyboard-testing evidence in the screenshots folder.
 
 ## Pages
 
-The portfolio currently contains five interconnected pages:
+The portfolio currently contains six interconnected pages:
 
 - `index.html` - Hero introduction and social links
 - `about.html` - Biography, education and work experience
+- `skills.html` – Data-driven technical skills with filtering and sorting
 - `projects.html` - Six projects and a 3 x 3 original-image gallery
 - `contact.html` - Contact information and contact form
 - `feedback.html` - Interactive feedback form with JavaScript validation
@@ -52,24 +53,24 @@ enabled in the browser for the interactive Lab 2 features.
 
 ## Project Structure
 
-```text
 patience-interactive-lab2/
 ├── images/
 ├── screenshots/
 ├── websites/
-│   ├── js/
-│   │   └── feedback.js
-│   ├── about.html
-│   ├── contact.html
-│   ├── feedback.html
-│   ├── index.html
-│   ├── projects.html
-│   └── style.css
+│ ├── js/
+│ │ ├── feedback.js
+│ │ └── skills.js
+│ ├── about.html
+│ ├── contact.html
+│ ├── feedback.html
+│ ├── index.html
+│ ├── projects.html
+│ ├── skills.html
+│ └── style.css
 ├── .gitignore
 ├── build_log.md
 ├── Patience-Documentation.pdf
 └── README.md
-```
 
 The HTML documents and shared stylesheet are stored in the `websites` folder.
 The Grade 3 JavaScript is stored in `websites/js/feedback.js`. Website images
@@ -80,8 +81,10 @@ are stored in `images`, while development and testing evidence is stored in
 
 ### Grade 3: Accessible Feedback Form
 
-The Grade 3 feature is implemented on `feedback.html`. Its JavaScript is stored
-in `websites/js/feedback.js`.
+The Grade 3 feedback-form JavaScript is stored in
+`websites/js/feedback.js`. The Grade 4 data-driven Skills feature is stored in
+`websites/js/skills.js`. Website images are stored in `images`, while
+development and testing evidence is stored in `screenshots`.
 
 The form contains:
 
@@ -133,6 +136,94 @@ The Clear button also restores the complete initial state.
 - `updateCharacterCount()` updates the live counter.
 - `resetForm()` restores the complete initial state.
 - `handleFormSubmit()` validates the form and controls submission feedback.
+
+## Grade 4: Data-Driven Skills Showcase
+
+The Skills page is generated dynamically from a JavaScript array containing 22
+skill objects across five categories:
+
+- Frontend
+- Backend
+- Databases
+- Testing and DevOps
+- Cloud and AI
+
+Every skill object contains:
+
+- A unique ID
+- Name
+- Category
+- Proficiency from 1 to 5
+- Years of experience
+- Description
+- Technology icon class
+
+The `renderSkills()` function creates the cards with DOM methods instead of
+placing repeated cards directly in the HTML.
+
+### Filtering
+
+The category buttons use `data-category` attributes. Selecting a button updates
+the active category, its `aria-pressed` state and the displayed cards.
+
+The available filters are:
+
+- All Skills
+- Frontend
+- Backend
+- Databases
+- Testing and DevOps
+- Cloud and AI
+
+### Sorting
+
+The Skills page supports three sorting choices:
+
+- Proficiency from high to low
+- Experience from high to low
+- Name from A to Z
+
+The sorting function copies the filtered array before calling `sort()`. This
+prevents the original skills data from being changed.
+
+### Combined State
+
+Filtering and sorting use the shared `activeCategory` and `activeSort` state
+variables. Changing the sorting option does not reset the selected category,
+and changing the category does not reset the selected sorting option.
+
+### Dynamic Result Counter
+
+The result counter displays the number of visible skills, for example:
+
+`Showing 7 of 22 skills`
+
+It uses `role="status"`, `aria-live="polite"` and `aria-atomic="true"` so that
+updates can be announced by assistive technology.
+
+### Skills Accessibility
+
+The Skills page includes:
+
+- Keyboard-accessible filter buttons and sorting control
+- Visible focus indicators
+- `aria-pressed` states on category buttons
+- A live result counter
+- A list role for the skills container
+- List-item roles for generated skill cards
+- Written proficiency values alongside decorative visual bars
+- Reduced-motion support
+- A `noscript` fallback message
+
+### Skills Responsive Design
+
+The Skills grid displays:
+
+- Three columns on desktop
+- Two columns on tablet
+- One column on mobile
+
+Testing evidence is stored in the `screenshots` folder.
 
 ## Design System and CSS custom properties
 
@@ -186,6 +277,7 @@ Responsive behaviour includes:
   Anchor destinations use scroll-margin-top so that headings remain visible
   below the fixed header.
 - Feedback page: two columns on desktop and one column on smaller screens
+- Skills grid: three columns, two columns and then one column
 
 ## Semantic HTML
 
@@ -232,6 +324,15 @@ overlapping information card, primary project link and social-media links.
 The About page presents a biography followed by responsive Education and Work
 Experience timeline cards.
 
+### Skills
+
+The Skills page presents 22 technical skills generated dynamically from a
+JavaScript array. Visitors can filter the skills by category and sort them by
+proficiency, experience or name.
+
+Filtering and sorting work together through shared state variables. A live
+counter communicates how many skills are currently displayed.
+
 ### Projects and Gallery
 
 The Projects page contains six semantic project articles and a responsive
@@ -271,6 +372,7 @@ browser and is not sent to a server.
 - JavaScript event listeners
 - Google Fonts
 - Font Awesome
+- Devicon technology icons
 
 ## Project Constraints
 
@@ -286,9 +388,9 @@ browser and is not sent to a server.
 
 The first version placed all content on one long page. Although the navigation
 worked, this structure did not satisfy the advanced multi-page requirement.
-I separated the content into four HTML documents and connected them using
-repeated header and footer navigation. Each page now has a clear purpose, while
-the shared stylesheet maintains visual consistency.
+For Lab 1, I separated the original one-page portfolio into four interconnected
+HTML documents. Lab 2 later added `feedback.html` and `skills.html`, bringing
+the portfolio to six interconnected pages.
 
 ### Problem 2: Keyboard access to the CSS-only mobile menu
 
@@ -352,10 +454,14 @@ The portfolio was tested at the following viewport widths:
 - Horizontal overflow
 - Reduced-motion behaviour
 - Alternative text and form labels
-- All five HTML pages were checked using the W3C Markup Validation Service,
-  including the new `feedback.html` page. The shared stylesheet was checked using
-  the W3C CSS Validation Service. JavaScript syntax was checked using
-  `node --check`, and the browser console was checked for runtime errors.
+
+### Grade 3 Feedback Form Testing
+
+- All six HTML pages were checked using the W3C Markup Validation Service,
+  including the Lab 2 `feedback.html` and `skills.html` pages. The shared
+  stylesheet was checked using the W3C CSS Validation Service. JavaScript syntax
+  was checked using `node --check`, and the browser Console was checked for
+  runtime errors.
 - Empty feedback-form submission
 - Invalid and valid field values
 - Live Comments counter
@@ -365,3 +471,22 @@ The portfolio was tested at the following viewport widths:
 - Complete Clear-button reset
 - Keyboard-only form operation
 - Browser-console error check
+
+### Grade 4 Skills Testing
+
+The Skills page was tested for:
+
+- Correct rendering of all 22 skill objects
+- All five category filters
+- Proficiency, experience and alphabetical sorting
+- Combined filtering and sorting
+- Dynamic result-counter updates
+- Keyboard operation
+- Visible focus states
+- Desktop, tablet and mobile layouts
+- Horizontal overflow
+- JavaScript Console errors
+
+The JavaScript syntax was also checked with:
+
+`node --check websites/js/skills.js`
