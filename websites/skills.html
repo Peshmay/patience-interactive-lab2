@@ -162,7 +162,7 @@
               <select id="skill-sort" name="skillSort">
                 <option value="proficiency">Proficiency: high to low</option>
                 <option value="experience">Experience: high to low</option>
-                <option value="name">Name: A - Z</option>
+                <option value="name">Name: A-Z</option>
               </select>
             </div>
           </div>
@@ -173,6 +173,7 @@
             id="skills-counter"
             role="status"
             aria-live="polite"
+            aria-atomic="true"
           >
             Showing 0 of 0 skills
           </p>
@@ -184,6 +185,7 @@
           <div
             class="skills-grid"
             id="skills-grid"
+            role="list"
             aria-label="Technical skills"
           ></div>
 
