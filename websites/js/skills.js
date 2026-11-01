@@ -353,6 +353,17 @@ function renderSkills(skillsToDisplay) {
     proficiencyLabel.textContent = "Proficiency:";
     proficiency.append(proficiencyLabel, ` ${skill.proficiency} out of 5`);
 
+    // Decorative visual bar
+    const proficiencyBar = document.createElement("div");
+    proficiencyBar.classList.add("proficiency-bar");
+    proficiencyBar.setAttribute("aria-hidden", "true");
+
+    const proficiencyLevel = document.createElement("span");
+    proficiencyLevel.classList.add("proficiency-level");
+    proficiencyLevel.style.width = `${skill.proficiency * 20}%`;
+
+    proficiencyBar.append(proficiencyLevel);
+
     const experience = document.createElement("p");
     const experienceLabel = document.createElement("strong");
     experienceLabel.textContent = "Experience:";
@@ -361,7 +372,7 @@ function renderSkills(skillsToDisplay) {
       ` ${formatExperience(skill.yearsExperience)}`,
     );
 
-    skillDetails.append(proficiency, experience);
+    skillDetails.append(proficiency, proficiencyBar, experience);
 
     skillCard.append(
       skillIcon,
