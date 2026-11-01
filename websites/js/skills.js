@@ -4,8 +4,8 @@
   SKILLS DATA
 
   Each object represents one technical skill.
-  The cards will later be created from this array
-  instead of being written manually in skills.html.
+  The cards are created from this array instead
+  of being written manually in skills.html.
 */
 
 const skills = [
@@ -122,16 +122,16 @@ const skills = [
       "I design RESTful endpoints with validation, clear responses and structured error handling.",
     iconClass: "devicon-swagger-plain colored",
   },
- {
-  id: 12,
-  name: "Microservices Architecture",
-  category: "backend",
-  proficiency: 3,
-  yearsExperience: 1,
-  description:
-    "I understand how applications can be divided into smaller services with separate responsibilities.",
-  iconClass: "fa-solid fa-diagram-project",
-},
+  {
+    id: 12,
+    name: "Microservices Architecture",
+    category: "backend",
+    proficiency: 3,
+    yearsExperience: 1,
+    description:
+      "I understand how applications can be divided into smaller services with separate responsibilities.",
+    iconClass: "fa-solid fa-diagram-project",
+  },
 
   // DATABASES
   {
@@ -241,7 +241,188 @@ const skills = [
 ];
 
 /*
-  Temporary confirmation during development.
-  Remove this log after the dynamic cards are working.
+  DOM SELECTIONS
 */
-console.log("Skills data loaded:", skills);
+
+const skillsGrid = document.querySelector("#skills-grid");
+const skillsCounter = document.querySelector("#skills-counter");
+const filterButtons = document.querySelectorAll(".skill-filter");
+const skillSortSelect = document.querySelector("#skill-sort");
+
+/*
+  STATE VARIABLES
+*/
+
+let activeCategory = "all";
+let activeSort = "proficiency";
+
+/*
+  FILTERING FUNCTION
+
+  Returns all skills when "all" is selected.
+  Otherwise, returns only skills matching the selected category.
+*/
+
+function getFilteredSkills() {
+  if (activeCategory === "all") {
+    return skills;
+  }
+
+  return skills.filter((skill) => skill.category === activeCategory);
+}
+
+/*
+  SORTING FUNCTION
+*/
+
+function getSortedSkills(skillsToSort) {
+  const sortedSkills = [...skillsToSort];
+
+  if (activeSort === "experience") {
+    sortedSkills.sort((firstSkill, secondSkill) => {
+      return (
+        secondSkill.yearsExperience - firstSkill.yearsExperience ||
+        firstSkill.name.localeCompare(secondSkill.name)
+      );
+    });
+  } else if (activeSort === "name") {
+    sortedSkills.sort((firstSkill, secondSkill) => {
+      return firstSkill.name.localeCompare(secondSkill.name);
+    });
+  } else {
+    sortedSkills.sort((firstSkill, secondSkill) => {
+      return (
+        secondSkill.proficiency - firstSkill.proficiency ||
+        firstSkill.name.localeCompare(secondSkill.name)
+      );
+    });
+  }
+
+  return sortedSkills;
+}
+
+/*
+  DISPLAY-UPDATE FUNCTION
+
+  Applies the current filter and sort settings,
+  then renders the resulting skills.
+*/
+
+function updateSkillsDisplay() {
+  const filteredSkills = getFilteredSkills();
+  const sortedSkills = getSortedSkills(filteredSkills);
+
+  renderSkills(sortedSkills);
+}
+
+/*
+  CARD-RENDERING FUNCTION
+
+  Creates and displays one card for every skill.
+*/
+
+function renderSkills(skillsToDisplay) {
+  skillsGrid.replaceChildren();
+
+  skillsToDisplay.forEach((skill) => {
+    const skillCard = document.createElement("article");
+    skillCard.classList.add("skill-card");
+    skillCard.setAttribute("role", "listitem");
+
+    const skillIcon = document.createElement("i");
+    skillIcon.className = skill.iconClass;
+    skillIcon.setAttribute("aria-hidden", "true");
+
+    const skillName = document.createElement("h2");
+    skillName.classList.add("skill-card-title");
+    skillName.textContent = skill.name;
+
+    const skillCategory = document.createElement("p");
+    skillCategory.classList.add("skill-category");
+    skillCategory.textContent = formatCategory(skill.category);
+
+    const skillDescription = document.createElement("p");
+    skillDescription.classList.add("skill-description");
+    skillDescription.textContent = skill.description;
+
+    const skillDetails = document.createElement("div");
+    skillDetails.classList.add("skill-details");
+
+    const proficiency = document.createElement("p");
+    const proficiencyLabel = document.createElement("strong");
+    proficiencyLabel.textContent = "Proficiency:";
+    proficiency.append(proficiencyLabel, ` ${skill.proficiency} out of 5`);
+
+    const experience = document.createElement("p");
+    const experienceLabel = document.createElement("strong");
+    experienceLabel.textContent = "Experience:";
+    experience.append(
+      experienceLabel,
+      ` ${formatExperience(skill.yearsExperience)}`,
+    );
+
+    skillDetails.append(proficiency, experience);
+
+    skillCard.append(
+      skillIcon,
+      skillName,
+      skillCategory,
+      skillDescription,
+      skillDetails,
+    );
+
+    skillsGrid.append(skillCard);
+  });
+
+  skillsCounter.textContent = `Showing ${skillsToDisplay.length} of ${skills.length} skills`;
+}
+
+/*
+  FORMATTING FUNCTIONS
+*/
+
+function formatCategory(category) {
+  const categoryNames = {
+    frontend: "Frontend",
+    backend: "Backend",
+    database: "Database",
+    "testing-devops": "Testing & DevOps",
+    "cloud-ai": "Cloud & AI",
+  };
+
+  return categoryNames[category] ?? category;
+}
+
+function formatExperience(years) {
+  return years === 1 ? "1 year" : `${years} years`;
+}
+
+/*
+  EVENT LISTENERS
+*/
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    activeCategory = button.dataset.category;
+
+    filterButtons.forEach((filterButton) => {
+      const isSelected = filterButton === button;
+
+      filterButton.classList.toggle("is-active", isSelected);
+      filterButton.setAttribute("aria-pressed", String(isSelected));
+    });
+
+    updateSkillsDisplay();
+  });
+});
+
+skillSortSelect.addEventListener("change", () => {
+  activeSort = skillSortSelect.value;
+  updateSkillsDisplay();
+});
+
+/*
+  INITIAL DISPLAY CALL
+*/
+
+updateSkillsDisplay();
