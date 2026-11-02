@@ -5,23 +5,17 @@
 This project extends my Lab 1 portfolio with accessible and interactive
 JavaScript features.
 
-The portfolio is created using semantic HTML, responsive CSS and vanilla
-JavaScript. No JavaScript frameworks or libraries are used.
-
-My target for Lab 2 is Grade 5. The grading tracks are cumulative:
-
-- Grade 3: Accessible feedback form and JavaScript validation
-- Grade 4: Grade 3 plus a data-driven skills showcase
-- Grade 5: Grades 3 and 4 plus persistent accessibility display settings
+The portfolio was created using semantic HTML, responsive CSS and vanilla
+JavaScript. No JavaScript frameworks or JavaScript libraries were used.
 
 ## Current Development Status
 
-- Grade 3 feedback form: completed and tested
+- Grade 3 accessible feedback form: completed and tested
 - Grade 4 data-driven skills showcase: completed and tested
-- Grade 5 accessibility display settings: planned
+- Git history: 26 meaningful commits
 
-The Grade 4 implementation is documented with desktop, tablet, mobile,
-filtering, sorting and keyboard-testing evidence in the screenshots folder.
+My submission target for Lab 2 is Grade 4. Grade 4 is cumulative, so this
+submission includes the complete Grade 3 feedback-form feature and the Grade 4 skills-showcase feature.
 
 ## Pages
 
@@ -53,29 +47,34 @@ enabled in the browser for the interactive Lab 2 features.
 
 ## Project Structure
 
+```text
 patience-interactive-lab2/
 ├── images/
 ├── screenshots/
 ├── websites/
-│ ├── js/
-│ │ ├── feedback.js
-│ │ └── skills.js
-│ ├── about.html
-│ ├── contact.html
-│ ├── feedback.html
-│ ├── index.html
-│ ├── projects.html
-│ ├── skills.html
-│ └── style.css
+│   ├── js/
+│   │   ├── feedback.js
+│   │   └── skills.js
+│   ├── about.html
+│   ├── contact.html
+│   ├── feedback.html
+│   ├── index.html
+│   ├── projects.html
+│   ├── skills.html
+│   └── style.css
 ├── .gitignore
 ├── build_log.md
 ├── Patience-Documentation.pdf
 └── README.md
+```
 
 The HTML documents and shared stylesheet are stored in the `websites` folder.
-The Grade 3 JavaScript is stored in `websites/js/feedback.js`. Website images
-are stored in `images`, while development and testing evidence is stored in
-`screenshots`.
+The Grade 3 form behaviour is stored in `websites/js/feedback.js`, while the
+Grade 4 skills data, rendering, filtering and sorting are stored in
+`websites/js/skills.js`.
+
+Website images are stored in `images`, while development, validation and
+testing evidence is stored in `screenshots`.
 
 ## Lab 2 JavaScript Enhancements
 
@@ -194,9 +193,10 @@ and changing the category does not reset the selected sorting option.
 
 ### Dynamic Result Counter
 
-The result counter displays the number of visible skills, for example:
+The result counter communicates the number of visible skills, the active
+category and the current sorting option. For example:
 
-`Showing 7 of 22 skills`
+`Showing 7 of 22 skills. Category: Frontend. Sorted by name A to Z.`
 
 It uses `role="status"`, `aria-live="polite"` and `aria-atomic="true"` so that
 updates can be announced by assistive technology.
@@ -250,22 +250,18 @@ The seed constraint is the gold accent colour #BD9140. It is used for:
 - Selected borders
 - Buttons and interaction feedback
 - Keyboard focus indicators
-  Gold is used as an accent instead of a dominant background colour. This allows
-  it to guide attention without overwhelming the design.
+  Gold is used as an accent instead of a dominant background colour. This allows it to guide attention without overwhelming the design.
 
 ## Typography
 
 - Headings: Cormorant Garamond
 - Body text, navigation, buttons and form controls: Jost
-  Cormorant Garamond gives the headings an elegant and personal appearance,
-  while Jost keeps paragraphs and interactive controls clear and readable.
+  Cormorant Garamond gives the headings an elegant and personal appearance, while Jost keeps paragraphs and interactive controls clear and readable.
 
 ## Responsive Design
 
-The website uses CSS Grid, Flexbox, clamp() and media queries to adapt its
-layout.
-The primary mobile breakpoint is 850px, with an additional small-phone
-breakpoint at 520px.
+The website uses CSS Grid, Flexbox, clamp() and media queries to adapt its layout.
+The primary mobile breakpoint is 850px, with an additional small-phone breakpoint at 520px.
 Responsive behaviour includes:
 
 - Project cards: three columns, two columns and then one column
@@ -274,8 +270,7 @@ Responsive behaviour includes:
 - Contact section: two columns followed by one column
 - CSS-only hamburger navigation below 850px
 - Smaller typography, images and spacing on narrow screens
-  Anchor destinations use scroll-margin-top so that headings remain visible
-  below the fixed header.
+  Anchor destinations use scroll-margin-top so that headings remain visible below the fixed header.
 - Feedback page: two columns on desktop and one column on smaller screens
 - Skills grid: three columns, two columns and then one column
 
@@ -283,15 +278,15 @@ Responsive behaviour includes:
 
 The website uses semantic elements to describe the purpose of its content:
 
-- <header> contains the repeated identity and navigation
-- <nav> groups the page links
-- <main> contains each page's unique content
-- <section> groups related content
-- <article> represents each independent project
-- <figure> and <figcaption> connect gallery images to their descriptions
+- `<header> ` contains the repeated identity and navigation
+- `<nav>` groups the page links
+- `<main>` contains each page's unique content
+- `<section>` groups related content
+- `<article>` represents each independent project
+- `<figure>` and `<figcaption>` connect gallery images to their descriptions
 - `<form>` groups the controls on the Contact and Feedback pages
-- <footer> contains secondary navigation and copyright information
-  Every page contains one main <h1> describing its subject.
+- `<footer>` contains secondary navigation and copyright information
+  Every page contains one main `<h1>` describing its subject.
 
 ## Accessibility
 
@@ -321,8 +316,7 @@ overlapping information card, primary project link and social-media links.
 
 ### About
 
-The About page presents a biography followed by responsive Education and Work
-Experience timeline cards.
+The About page presents a biography followed by responsive Education and Work Experience timeline cards.
 
 ### Skills
 
@@ -336,12 +330,11 @@ counter communicates how many skills are currently displayed.
 ### Projects and Gallery
 
 The Projects page contains six semantic project articles and a responsive
-3 × 3 gallery. Every gallery image uses <figure> and <figcaption>.
+3 × 3 gallery. Every gallery image uses `<figure>` and `<figcaption>`.
 
 ### Contact
 
-The Contact page contains Name, Email, Subject and Message fields. Every field
-has a connected label and uses HTML validation.
+The Contact page contains Name, Email, Subject and Message fields. Every field has a connected label and uses HTML validation.
 Because this project does not include a backend, the form uses mailto: and
 requires a configured email application.
 
@@ -350,12 +343,10 @@ requires a configured email application.
 The Feedback page contains an accessible form with Full Name, Email Address,
 Topic of Interest, Comments and an optional Website field.
 
-JavaScript provides immediate validation, written error messages, valid and
-invalid field states, a live character counter, complete Clear behaviour and a
+JavaScript provides immediate validation, written error messages, valid and invalid field states, a live character counter, complete Clear behaviour and a
 personalized success message.
 
-Because Lab 2 does not include a backend, the feedback is processed only in the
-browser and is not sent to a server.
+Because Lab 2 does not include a backend, the feedback is processed only in the browser and is not sent to a server.
 
 ## Technologies
 
@@ -416,6 +407,7 @@ outline-offset: 6px;
 
 The fixed header originally covered headings reached through anchor links.
 I added scroll-margin-top to the anchor destinations:
+
 #experience-education,
 #gallery,
 #contact {
@@ -435,6 +427,21 @@ classes, messages, the character counter and the status area.
 This correction keeps each function focused on one responsibility and prevents
 the same submission handler from running more than once.
 
+### Problem 5: Keeping filtering and sorting active together
+
+The Skills page originally needed a reliable way to remember both the selected
+category and the selected sorting option. If filtering and sorting were handled
+separately, changing one control could reset the other.
+
+I created the `activeCategory` and `activeSort` variables to store the current
+interface state. The `updateSkillsDisplay()` function first calls
+`getFilteredSkills()`, then sends the filtered result to `getSortedSkills()`,
+and finally passes the result to `renderSkills()`.
+
+This means that changing the filter keeps the selected sort order, while
+changing the sort order keeps the selected category. The visible result counter
+is updated after every render.
+
 ## Testing
 
 The portfolio was tested at the following viewport widths:
@@ -443,10 +450,19 @@ The portfolio was tested at the following viewport widths:
 - Tablet: 768px
 - Mobile: 390px
 - Small mobile: 360px
-  Testing covered:
+
+### Testing covered:
+
 - Header and navigation behaviour
 - CSS-only hamburger menu
-- Anchor-link positioning
+- Feedback-form validation
+- Feedback-form success and Clear behaviour
+- Live Comments counter
+- Dynamic skill rendering
+- Category filtering
+- All three sorting options
+- Combined filtering and sorting
+- Dynamic skills result counter
 - Project and gallery grids
 - Image scaling and cropping
 - Contact-form alignment
@@ -455,13 +471,41 @@ The portfolio was tested at the following viewport widths:
 - Reduced-motion behaviour
 - Alternative text and form labels
 
+### JavaScript Syntax Checks
+
+Both JavaScript files were syntax-checked from the root of the repository using
+Node.js:
+
+```bash
+node --check websites/js/feedback.js && echo "feedback.js syntax passed"
+node --check websites/js/skills.js && echo "skills.js syntax passed"
+```
+
+Both commands completed successfully.
+
+The `node --check` command checks JavaScript syntax. It does not test browser
+behaviour, DOM updates or user interaction. Therefore, the Feedback and Skills
+features were also tested through Live Server using the browser Console.
+
+### HTML and CSS Validation
+
+All six HTML pages were checked using the W3C Markup Validation Service:
+
+- `index.html`
+- `about.html`
+- `skills.html`
+- `projects.html`
+- `feedback.html`
+- `contact.html`
+
+The final `style.css` file was checked using the W3C CSS Validation Service.
+
+All six HTML pages completed validation with no errors or warnings. The final
+`style.css` file completed CSS validation with no errors. Screenshots of the
+final validation results are stored in the `screenshots` folder.
+
 ### Grade 3 Feedback Form Testing
 
-- All six HTML pages were checked using the W3C Markup Validation Service,
-  including the Lab 2 `feedback.html` and `skills.html` pages. The shared
-  stylesheet was checked using the W3C CSS Validation Service. JavaScript syntax
-  was checked using `node --check`, and the browser Console was checked for
-  runtime errors.
 - Empty feedback-form submission
 - Invalid and valid field values
 - Live Comments counter
@@ -470,23 +514,38 @@ The portfolio was tested at the following viewport widths:
 - Four-second success-message timeout
 - Complete Clear-button reset
 - Keyboard-only form operation
-- Browser-console error check
+- Browser-console checked with no errors found
 
 ### Grade 4 Skills Testing
 
 The Skills page was tested for:
 
-- Correct rendering of all 22 skill objects
+- Rendering all 22 skill objects from the JavaScript array
+- Displaying the required name, category, proficiency, experience and description
+- Displaying a visual proficiency indicator
 - All five category filters
-- Proficiency, experience and alphabetical sorting
-- Combined filtering and sorting
+- Clear active-filter styling and `aria-pressed` updates
+- Proficiency sorting from high to low
+- Experience sorting from high to low
+- Alphabetical sorting from A to Z
+- Filtering and sorting applied together
 - Dynamic result-counter updates
-- Keyboard operation
-- Visible focus states
-- Desktop, tablet and mobile layouts
-- Horizontal overflow
-- JavaScript Console errors
+- Keyboard operation of every filter button and the sorting control
+- Visible keyboard focus states
+- Three-column, two-column and one-column responsive layouts
+- Horizontal overflow at narrow widths
+- Browser Console checked with no errors found
 
-The JavaScript syntax was also checked with:
+The required Grade 4 evidence shows a category filter and sorting choice applied
+at the same time, together with the updated result counter. Testing screenshots
+are stored in the `screenshots` folder.
 
-`node --check websites/js/skills.js`
+### Git Development Evidence
+
+The repository exceeds the minimum requirement of 25 meaningful commits for
+Grade 4.
+
+The Git history records separate development stages, including semantic HTML
+structure, CSS styling, feedback-form validation, dynamic skill rendering,
+filtering, sorting, accessibility improvements, responsive testing and
+corrections.
