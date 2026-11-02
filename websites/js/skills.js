@@ -385,8 +385,15 @@ function renderSkills(skillsToDisplay) {
     skillsGrid.append(skillCard);
   });
 
-  skillsCounter.textContent = `Showing ${skillsToDisplay.length} of ${skills.length} skills`;
-}
+  const categoryLabel =
+  activeCategory === "all"
+    ? "all categories"
+    : formatCategory(activeCategory);
+
+skillsCounter.textContent =
+  `Showing ${skillsToDisplay.length} of ${skills.length} skills. ` +
+  `Category: ${categoryLabel}. ` +
+  `Sorted by ${formatSortOption(activeSort)}.`;
 
 /*
   FORMATTING FUNCTIONS
@@ -406,6 +413,19 @@ function formatCategory(category) {
 
 function formatExperience(years) {
   return years === 1 ? "1 year" : `${years} years`;
+}
+
+/*
+  Converts the stored sorting value into a readable label.
+*/
+function formatSortOption(sortOption) {
+  const sortNames = {
+    proficiency: "proficiency from high to low",
+    experience: "experience from high to low",
+    name: "name from A to Z",
+  };
+
+  return sortNames[sortOption] ?? sortOption;
 }
 
 /*
