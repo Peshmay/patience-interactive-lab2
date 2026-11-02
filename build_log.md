@@ -1,6 +1,5 @@
 # Build Log – Patience Evertsson Interactive Portfolio
 
-
 ## Introduction
 
 This Build Log documents the development of my interactive multi-page
@@ -39,7 +38,8 @@ foundation for Lab 2.
 
 ![Initial header](screenshots/header-initial.png)
 
-The first header contained the website identity and navigation links. However, the design was plain, and the navigation did not remain visible when scrolling.
+The first header contained the website identity and navigation links. However,
+the design was plain, and the navigation did not remain visible when scrolling.
 
 ### Problem
 
@@ -60,7 +60,11 @@ Visitors had to return to the top of the page to use the navigation. Anchor dest
 
 ### Result
 
-The final header remains visible while scrolling and clearly shows the visitor’s current location. The navigation is consistent across all four pages.
+The final header remains visible while scrolling and clearly shows the
+visitor's current location. The Lab 1 header was consistent across the original
+four pages. During Lab 2, I extended the same navigation structure to
+`feedback.html` and `skills.html`, creating consistent navigation across all
+six pages.
 
 ## 2. Hero Section
 
@@ -293,7 +297,7 @@ the mobile menu.
 ### Solution
 
 I visually hid the checkbox while keeping it focusable
-``css
+
 .menu-toggle {
 position: absolute;
 width: 1px;
@@ -431,7 +435,7 @@ Valid fields receive a green border after successful validation.
 
 ### Validation errors
 
-![Feedback validation errors](screenshots/feedback-error.png)
+![Empty submission showing written errors, red field borders and focus on the first invalid field](screenshots/feedback-error.png)
 
 ### Live Comments counter
 
@@ -476,7 +480,18 @@ When the form is valid:
 5. The counter returns to its initial state.
 6. The success message disappears after four seconds.
 
+### Valid field state
+
+After entering valid information, the checked fields display green borders.
+The Comments counter also becomes green after reaching the 15-character
+minimum.
+
+![Feedback form showing valid fields and the completed character minimum](screenshots/feedback-valid.png)
+
 ### Successful submission
+
+After every field passed validation, the form displayed the personalised
+success message before returning to its initial state.
 
 ![Successful feedback submission](screenshots/feedback-success.png)
 
@@ -521,11 +536,12 @@ I tested:
 - Four-second message timeout
 - Clear-button reset
 - Keyboard-only operation
-- Browser Console errors
+- Browser Console checked with no errors found
 
 JavaScript syntax was checked using:
 
 `node --check websites/js/feedback.js`
+![Successful validation of feedback.js](screenshots/feedback-js-check.png)
 
 ### Grade 3 result
 
@@ -623,13 +639,13 @@ and then renders the cards.
 
 ### Filtered and sorted result
 
-![Filtered and sorted Skills](screenshots/skills-filtered-sorted.png)
+![Frontend filter and alphabetical sorting applied together with the updated result counter](screenshots/skills-filtered-sorted.png)
 
 ### Dynamic counter
 
 The counter displays results such as:
 
-`Showing 7 of 22 skills`
+`Showing 7 of 22 skills. Category: Frontend. Sorted by name A to Z.`
 
 It uses:
 
@@ -672,10 +688,6 @@ The Skills grid displays:
 
 ![Skills mobile](screenshots/skills-mobile.png)
 
-### Keyboard focus
-
-![Skills keyboard focus](screenshots/skills-keyboard-focus.png)
-
 ### Grade 4 testing
 
 I tested:
@@ -689,11 +701,12 @@ I tested:
 - Visible focus indicators
 - Desktop, tablet and mobile layouts
 - Horizontal overflow
-- Browser Console errors
+- Browser Console checked with no errors found
 
 JavaScript syntax was checked using:
 
 `node --check websites/js/skills.js`
+![Successful validation of skills.js](screenshots/skills-js-check.png)
 
 ### Grade 4 result
 
@@ -711,17 +724,25 @@ keyboard accessible.
 
 ![Successful validation of skills.html](screenshots/skills-validation.png)
 
-### JavaScript syntax checks
+### Final stylesheet validation
 
-I checked both JavaScript files using:
+After adding the Feedback and Skills styles, I validated the final version of
+`style.css`. The validator completed with no errors.
 
-- `node --check websites/js/feedback.js`
-- `node --check websites/js/skills.js`
+![Successful validation of the final style.css file](screenshots/lab2-css-validation.png)
 
-I also tested both pages in the browser and checked the Console for runtime
-errors.
+## 15. Git Development Evidence
 
-## 15. Final Reflection
+I committed the project in separate stages instead of adding the complete
+solution in one commit. The Git history records the Feedback form structure,
+validation behaviour, successful submission, Skills data, dynamic card
+rendering, filtering, sorting, accessibility improvements, testing and
+corrections.
+
+The repository contains more than the minimum 25 meaningful commits required
+for Grade 4.
+
+## 16. Final Reflection
 
 Lab 2 changed my portfolio from a static HTML and CSS website into an
 interactive vanilla JavaScript project.
