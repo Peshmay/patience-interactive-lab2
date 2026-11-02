@@ -386,14 +386,15 @@ function renderSkills(skillsToDisplay) {
   });
 
   const categoryLabel =
-  activeCategory === "all"
-    ? "all categories"
-    : formatCategory(activeCategory);
+    activeCategory === "all"
+      ? "all categories"
+      : formatCategory(activeCategory);
 
-skillsCounter.textContent =
-  `Showing ${skillsToDisplay.length} of ${skills.length} skills. ` +
-  `Category: ${categoryLabel}. ` +
-  `Sorted by ${formatSortOption(activeSort)}.`;
+  skillsCounter.textContent =
+    `Showing ${skillsToDisplay.length} of ${skills.length} skills. ` +
+    `Category: ${categoryLabel}. ` +
+    `Sorted by ${formatSortOption(activeSort)}.`;
+}
 
 /*
   FORMATTING FUNCTIONS
