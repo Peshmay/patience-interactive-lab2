@@ -68,7 +68,7 @@ const skills = [
     yearsExperience: 1,
     description:
       "I use Next.js to create structured React applications with routing and server-side features.",
-    iconClass: "devicon-nextjs-original",
+    iconClass: "devicon-nextjs-original-wordmark colored",
   },
   {
     id: 7,
@@ -289,6 +289,13 @@ function getSortedSkills(skillsToSort) {
     sortedSkills.sort((firstSkill, secondSkill) => {
       return firstSkill.name.localeCompare(secondSkill.name);
     });
+  } else if (activeSort === "proficiency-low") {
+    sortedSkills.sort((firstSkill, secondSkill) => {
+      return (
+        firstSkill.proficiency - secondSkill.proficiency ||
+        firstSkill.name.localeCompare(secondSkill.name)
+      );
+    });
   } else {
     sortedSkills.sort((firstSkill, secondSkill) => {
       return (
@@ -416,18 +423,20 @@ function formatExperience(years) {
   return years === 1 ? "1 year" : `${years} years`;
 }
 
-/*
-  Converts the stored sorting value into a readable label.
-*/
 function formatSortOption(sortOption) {
   const sortNames = {
     proficiency: "proficiency from high to low",
+    "proficiency-low": "proficiency from low to high",
     experience: "experience from high to low",
     name: "name from A to Z",
   };
 
   return sortNames[sortOption] ?? sortOption;
 }
+
+/*
+  Converts the stored sorting value into a readable label.
+*/
 
 /*
   EVENT LISTENERS
